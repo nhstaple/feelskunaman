@@ -1,0 +1,10 @@
+
+# secret stuff
+*supersecret*
+
+# files
+.cache
+*.pyc
+
+# directories
+*/__pycache__/*
