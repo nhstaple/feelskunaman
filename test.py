@@ -36,6 +36,16 @@ def parseTask(taskName):
         print('\nmean data:')
         DisplayDict(mean, '  ')
 
+        valence = mean['valence']
+        arousal = mean['danceability']
+        if valence >= 0.50:
+            print('result  - happy')
+        else:
+            print('result  - sad')
+        if arousal >= 0.50:
+            print('result  - awake')
+        else:
+            print('result  - tired')
         # print(spotify.GetAnalysis(res['songIDs'][0]))
     else:
         displayHelp()
