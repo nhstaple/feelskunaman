@@ -9,19 +9,22 @@ def GetParser():
         description='A simple program to predict user emotions based off Spotify playlists'
     )
 
+    # corresponds to a .json file in ./tasks
     parser.add_argument(
         '--task',
-        default='honey',
+        default='kuna',
         type=str,
         choices=tasks
     )
 
+    # indicates how many songs to take from a playlist. -1 means take all
     parser.add_argument(
         '--num',
         default=-1,
         type=int
     )
 
+    # sets the seed for shuffling the playlist when --num is less than the total songs in a playlist
     parser.add_argument(
         '--seed',
         default=-1,
