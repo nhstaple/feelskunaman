@@ -1,20 +1,15 @@
 # test.py
 ## Description: driver to test development features 
 
-from json.decoder import JSONDecodeError
-import sys, getopt
+from argparse import Namespace
 
-def displayHelp():
-    print('TODO help command')
-    sys.exit(0)
-
-def parseTask(taskName):
-    TASK_DIR = './tasks/'
-    FILE_TYPE = '.json'
-    fp = TASK_DIR + taskName + FILE_TYPE
+def parseTask(args:Namespace):
+    taskName = args.task
+    num = args.num
+    import json
+    from json.decoder import JSONDecodeError
     try:
-        import json
-        file = open(fp)
+        file = open(taskName)
         task = json.load(file)
         file.close()
     except JSONDecodeError as err:
@@ -27,43 +22,32 @@ def parseTask(taskName):
         from helpers.SpotifyAPI.client import Client
         spotify = Client()
         url = task['playlist']
-        res = spotify.GetPlaylist(url)
+        res = spotify.GetPlaylist(url=url, max_num=num, display=True)
 
         from helpers.math.mean import ComputeMean
         mean = ComputeMean(res['data'])
-        
+
         from helpers.display.dict import DisplayDict
         print('\nmean data:')
         DisplayDict(mean, '  ')
 
-        valence = mean['valence']
-        arousal = mean['danceability']
-        if valence >= 0.50:
-            print('result  - happy')
-        else:
-            print('result  - sad')
-        if arousal >= 0.50:
-            print('result  - awake')
-        else:
-            print('result  - tired')
-        # print(spotify.GetAnalysis(res['songIDs'][0]))
-    else:
-        displayHelp()
-
-def main(argv):
-    try:
-        # https://docs.python.org/3/library/getopt.html
-        opts, args = getopt.getopt(
-            argv,
-            'ht:',
-            [ 'task=' ]
+        from helpers.affect.scherer import Scherer
+        emotive = Scherer(
+            2 * mean['valence'] - 1,
+            2 * mean['danceability'] - 1
         )
-    except getopt.GetoptError:
-        displayHelp()
+        (labels, degrees) = emotive.getLabels()
+        print('\nin degs: {:.2f} (2D Scherer normalized vector)'.format(degrees))
+        print('labels : {0:s}, {1:s}'.format(labels[0], labels[1]))
 
-    for opt, arg in opts:
-        if opt == 'h': displayHelp()
-        elif opt in ('-t', '--task'): parseTask(arg)
+        # spotify.GetAnalysis(res['songIDs'][0], True)
+
+def main(args:Namespace):
+    print('\nFeels Kuna Man - a haphazard tool to check on the homie\'s feels using his Spotify weekly plalist\n')
+    parseTask(args)
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    from parsers.test import GetParser 
+    import sys
+    args = GetParser().parse_args(sys.argv[1:])
+    main(args)

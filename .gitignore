@@ -3,8 +3,10 @@
 *supersecret*
 
 # files
+cache/*
 .cache
 *.pyc
+tasks/nicole.json
 
 # directories
 */__pycache__/*

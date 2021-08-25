@@ -7,8 +7,8 @@ class Client:
         from helpers.SpotifyAPI.supersecret import clientID, secretKey 
         self._client = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(clientID, secretKey))
     
-    def GetPlaylist(self, url:str, max_num:int = 10, display:bool = True):
-        print('playlist URL:\n{:s}\n'.format(url))
+    def GetPlaylist(self, url:str, max_num:int = -1, display:bool = True):
+        # print('playlist URL:\n{:s}\n'.format(url))
         
         # initialize return variables
         songIDs = list()
@@ -16,7 +16,7 @@ class Client:
 
         # grab the playlist ID
         playlistID = (url.split('/'))[-1]
-        print('playlistID:\n{:s}\n'.format(playlistID))
+        # print('playlistID:\n{:s}\n'.format(playlistID))
 
         # query the spotify api for the playlist data
         playlistData = self._client.playlist(playlistID)
@@ -28,9 +28,15 @@ class Client:
         # print(playlistData['tracks']['items'][0])
 
         if display:
+            print('name : ' + playlistData['name'])
+            if(len(playlistData['description'])):
+                print('description: ' + playlistData['description'])
+            print('owner: ' + playlistData['owner']['display_name'])
             # display the titles of songs
             print('songs:')
-            for i in range(0, max_num):
+            bounds = range(0, len(playlistData['tracks']['items']))
+            if max_num > 0: bounds = range(0, max_num)
+            for i in bounds:
                 current_song = playlistData['tracks']['items'][i]['track']
                 current_song = Client.__StripSongObject(current_song)
                 songIDs.append(current_song['id'])
@@ -41,10 +47,26 @@ class Client:
             data.append(Client.__StripSongData(result))
         # print(data[0])
 
-        return { 'songIDs': songIDs, 'data': data, 'url': url }
+        return {
+            'songIDs': songIDs,
+            'data': data,
+            'url':url,
+            'name': playlistData['name'],
+            'description': playlistData['description']
+        }
 
-    def GetAnalysis(self, url:str):
+    def GetAnalysis(self, url:str, cacheToJSON:bool = False):
         res = self._client.audio_analysis(url)
+        del res['track']['codestring'] ; del res['track']['code_version']
+        del res['track']['echoprintstring'] ; del res['track']['echoprint_version']
+        del res['track']['synchstring'] ; del res['track']['synch_version']
+        del res['track']['rhythmstring'] ; del res['track']['rhythm_version']
+        
+        if cacheToJSON:
+            import json
+            f = open('./cache/dump.json', 'w')
+            json.dump(res, f)
+            f.close()
         return res
 
     @staticmethod
