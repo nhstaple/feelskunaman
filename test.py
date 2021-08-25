@@ -4,8 +4,9 @@
 from argparse import Namespace
 
 def parseTask(args:Namespace):
-    taskName = args.task
+    taskName = './tasks/' + args.task + '.json'
     num = args.num
+    seed = args.seed
     import json
     from json.decoder import JSONDecodeError
     try:
@@ -14,13 +15,13 @@ def parseTask(args:Namespace):
         file.close()
     except JSONDecodeError as err:
         print('error- couldnt open task!')
-        print(fp)
+        print(task)
         print(err)
         sys.exit(-1)
 
     if 'playlist' in task:
         from helpers.SpotifyAPI.client import Client
-        spotify = Client()
+        spotify = Client(seed)
         url = task['playlist']
         res = spotify.GetPlaylist(url=url, max_num=num, display=True)
 

@@ -3,7 +3,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 class Client:
-    def __init__(self):
+    def __init__(self, seed=int):
+        self._seed = seed
         from helpers.SpotifyAPI.supersecret import clientID, secretKey 
         self._client = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(clientID, secretKey))
     
@@ -27,6 +28,10 @@ class Client:
         # print('\nplaylist.tracks.items keys')
         # print(playlistData['tracks']['items'][0])
 
+        if self._seed >= 0:
+            import random
+            random.Random(self._seed).shuffle(playlistData['tracks']['items'])
+
         if display:
             print('name : ' + playlistData['name'])
             if(len(playlistData['description'])):
@@ -34,12 +39,13 @@ class Client:
             print('owner: ' + playlistData['owner']['display_name'])
             # display the titles of songs
             print('songs:')
-            bounds = range(0, len(playlistData['tracks']['items']))
-            if max_num > 0: bounds = range(0, max_num)
-            for i in bounds:
-                current_song = playlistData['tracks']['items'][i]['track']
-                current_song = Client.__StripSongObject(current_song)
-                songIDs.append(current_song['id'])
+        bounds = range(0, len(playlistData['tracks']['items']))
+        if max_num > 0: bounds = range(0, max_num)
+        for i in bounds:
+            current_song = playlistData['tracks']['items'][i]['track']
+            current_song = Client.__StripSongObject(current_song)
+            songIDs.append(current_song['id'])
+            if display:
                 print('\t- {:s}'.format(current_song['name']))
 
         # get the data for the songs
