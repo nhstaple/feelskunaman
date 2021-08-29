@@ -27,20 +27,47 @@ labels = {
 
 class Scherer:
     def __init__(self, valence: float, arousal: float):
+        self._valence = valence
+        self._arousal = arousal
         self._vector = np.array([valence, arousal], dtype=float)
         self._vector = self._vector / np.linalg.norm(
             np.array([valence, arousal], dtype=float)
         )
     
-    def getVector(self):
-        return cp.copy(self._vector)
-    
-    def _getTheta(self):
-        return np.arctan2(self._vector.take(1), self._vector.take(0))
+    def __repr__(self):
+        labels, angle = self.getLabels()
+        value = '\n'
+        value = value + 'in degs: {:.2f}° '.format(angle)
+        
+        angle = self.getDeg()
+        if angle >= 0 and angle <= 90: value = value + '(Quad I)'
+        elif angle >= 90 and angle <= 180: value = value + '(Quad II)'
+        elif angle >= 180 and angle <= 270: value = value + '(Quad III)'
+        else: value = value + '(Quad IV)'
 
+        value = value + '\nvalence: {:.2f}'.format(self._valence)
+        value = value + '\narousal: {:.2f}'.format(self._arousal)
+        value = value + '\nlabels : {0:s}, {1:s}'.format(labels[0], labels[1])
+
+        return value
+
+    def getComponents(self): return self._valence, self._arousal
+
+    @staticmethod
+    def _radToDeg(rad): return rad * 180 / np.pi
+
+    def getVector(self): return cp.copy(self._vector)
+
+    def getDeg(self): return Scherer._radToDeg(self.getRad())
+
+    def getRad(self):
+        angle = np.arctan2(self._arousal, self._valence)
+        if angle < 0: angle = angle + 2 * np.pi
+        return angle
+    
     def getLabels(self):
-        theta = self._getTheta()
-        degs = theta * 180 / np.pi
+        theta = self.getRad()
+        degs = self.getDeg()
         res = list()
         
         # valence - good / bad 
@@ -48,13 +75,14 @@ class Scherer:
         if theta >= labels['valence']['happy'][0] and theta <= labels['valence']['happy'][1]:
             res.append('happy')
         ## sad 
-        elif theta >= labels['valence']['sad'][0] and theta <= labels['valence']['sad'][1]:
+        else:
             res.append('sad')
 
-        # arousal - engaged / lethargic 
+        # arousal - engaged / lethargic
+        ## awake / aroused
         if theta >= labels['arousal']['awake'][0] and theta <= labels['arousal']['awake'][1]:
             res.append('awake')
-        ## sad 
-        elif theta >= labels['arousal']['asleep'][0] and theta <= labels['arousal']['asleep'][1]:
+        ## asleep / passive
+        else:
             res.append('asleep')
         return res, degs

@@ -1,6 +1,8 @@
 # client.py | helpers.SpotifyAPI
+from os import error
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from helpers.affect.scherer import Scherer
 
 class Client:
     def __init__(self, seed=int):
@@ -8,55 +10,84 @@ class Client:
         from helpers.SpotifyAPI.supersecret import clientID, secretKey 
         self._client = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(clientID, secretKey))
     
+    def GetSong(self, songID:str, preserve = False):
+        features = self._client.audio_features(songID)[0]
+        data = Client.__StripSongData(features, True)
+        meta = self._client.track(songID)
+        if preserve:
+            data['artist'] = meta['artists'][0]['name']
+            data['name'] = meta['name']
+            data['album'] = meta['album']['name']
+            data['popularity'] = meta['popularity']
+            data['duration_ms'] = meta['duration_ms']
+        valence = 2 * data['valence'] - 1
+        arousal = 2 * data['danceability'] - 1
+        return Scherer(valence, arousal), data
+
     def GetPlaylist(self, url:str, max_num:int = -1, display:bool = True):
-        # print('playlist URL:\n{:s}\n'.format(url))
-        
+        if max_num > 100: max_num = 100  
         # initialize return variables
-        songIDs = list()
-        data    = list()
+        songIDs: list(str)     = []
+        vectors: list(Scherer) = []
+        data   : list(dict)    = []
 
         # grab the playlist ID
         playlistID = (url.split('/'))[-1]
-        # print('playlistID:\n{:s}\n'.format(playlistID))
 
         # query the spotify api for the playlist data
         playlistData = self._client.playlist(playlistID)
-        # print('return query keys')
-        # print(playlistData.keys())
-        # print('\nplaylist.tracks keys')
-        # print(playlistData['tracks'].keys())
-        # print('\nplaylist.tracks.items keys')
-        # print(playlistData['tracks']['items'][0])
 
-        if self._seed >= 0:
+        if self._seed > -1:
             import random
             random.Random(self._seed).shuffle(playlistData['tracks']['items'])
 
         if display:
-            print('name : ' + playlistData['name'])
-            if(len(playlistData['description'])):
-                print('description: ' + playlistData['description'])
+            print('name: ' + playlistData['name'])
+            if(len(playlistData['description'])): print('description: ' + playlistData['description'])
             print('owner: ' + playlistData['owner']['display_name'])
-            # display the titles of songs
-            print('songs:')
-        bounds = range(0, len(playlistData['tracks']['items']))
+            print('playlist:')
+        
+        n = len(playlistData['tracks']['items'])
+        bounds = range(0, n)
         if max_num > 0: bounds = range(0, max_num)
-        for i in bounds:
-            current_song = playlistData['tracks']['items'][i]['track']
-            current_song = Client.__StripSongObject(current_song)
-            songIDs.append(current_song['id'])
-            if display:
-                print('\t- {:s}'.format(current_song['name']))
 
+        names: list(str) = []
+        artists: list(str) = []
+        links: list(str) = []
+        for i in bounds:
+            current = playlistData['tracks']['items'][i]['track']
+            ID = current['id']
+            songIDs.append(ID)
+            names.append(current['name'])
+            links.append(current['external_urls']['spotify'])
+            artists.append(current['artists'][0]['name'])
+        
         # get the data for the songs
+        i = 0
         for result in self._client.audio_features(songIDs):
-            data.append(Client.__StripSongData(result))
-        # print(data[0])
+            song = Client.__StripSongData(result)
+            song['name'] = names[i]
+            song['url']  = links[i]
+            song['artist'] = artists[i]
+            data.append(song)
+
+            emotive = Scherer(
+                valence= 2 * song['valence'] - 1,
+                arousal= 2 * song['danceability'] - 1
+            )
+
+            vectors.append(emotive)
+            if display:
+                print('\t- ({0:3d}°) {1:s}'.format(round(emotive.getDeg()), names[i]))
+                print('\t\t ' + links[i] + '\n')
+            
+            i = i + 1
 
         return {
             'songIDs': songIDs,
             'data': data,
-            'url':url,
+            'vectors': vectors,
+            'url': url,
             'name': playlistData['name'],
             'description': playlistData['description']
         }
@@ -76,19 +107,29 @@ class Client:
         return res
 
     @staticmethod
-    def __StripSongObject(song:dict):
-        del song['album'] ; del song['available_markets'] ; del song['artists']
-        del song['external_ids'] ; del song['external_urls'] ; del song['disc_number']
-        del song['episode'] ; del song['is_local'] ; del song['preview_url']
-        del song['track_number']; del song['track'] ; del song['type']
+    def __StripSongObject(song:dict, preserve: bool = False):
+        #try:
+        if not preserve:
+            del song['artists']
+            del song['track']
+            del song['album']
+        del song['available_markets']
+        del song['external_ids']
+        del song['external_urls']
+        del song['disc_number']
+        del song['episode']
+        del song['is_local']
+        del song['preview_url']
+        del song['track_number']
+        del song['type']
         return song
 
     @staticmethod
-    def __StripSongData(data:dict):
-        del data['uri'] ; del data['track_href'] ; del data['analysis_url']
-        del data['id']; del data['type']
-        # arousal = data['danceability']
-        # del data['danceability']
-        # data['arousal'] = arousal
+    def __StripSongData(data:dict, preserve: bool = False):
+        del data['uri']
+        del data['track_href']
+        del data['analysis_url']
+        del data['id']
+        del data['type']
         return data
 

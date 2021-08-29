@@ -17,6 +17,16 @@ def GetParser():
         choices=tasks
     )
 
+    parser.add_argument(
+        '--song',
+        type=str
+    )
+
+    parser.add_argument(
+        '--playlist',
+        type=str
+    )
+
     # indicates how many songs to take from a playlist. -1 means take all
     parser.add_argument(
         '--num',
