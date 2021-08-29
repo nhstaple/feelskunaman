@@ -1,88 +1,81 @@
 
+from helpers.math.vector import Vec2D
+from typing import Tuple, Union
 import numpy as np
-import copy as cp
+from enum import Enum
 
-labels = {
-    'valence': {
-        'happy': [
-            np.pi*-1/2,
-            np.pi*1/2
-        ],
-        'sad': [
-            np.pi*1/2,
-            np.pi*3/2
-        ]
-    },
-    'arousal': {
-        'awake': [
-            0,
-            np.pi
-        ],
-        'asleep': [
-            np.pi,
-            np.pi*2
-        ]
-    }
-}
+VALENCE_RIGHT = 'happy'
+VALENCE_LEFT  = 'sad'
+AROUSAL_UP    = 'awake'
+AROUSAL_DOWN  = 'bored'
 
-class Scherer:
-    def __init__(self, valence: float, arousal: float):
-        self._valence = valence
-        self._arousal = arousal
-        self._vector = np.array([valence, arousal], dtype=float)
-        self._vector = self._vector / np.linalg.norm(
-            np.array([valence, arousal], dtype=float)
-        )
-    
-    def __repr__(self):
-        labels, angle = self.getLabels()
-        value = '\n'
-        value = value + 'in degs: {:.2f}° '.format(angle)
-        
-        angle = self.getDeg()
-        if angle >= 0 and angle <= 90: value = value + '(Quad I)'
-        elif angle >= 90 and angle <= 180: value = value + '(Quad II)'
-        elif angle >= 180 and angle <= 270: value = value + '(Quad III)'
-        else: value = value + '(Quad IV)'
-
-        value = value + '\nvalence: {:.2f}'.format(self._valence)
-        value = value + '\narousal: {:.2f}'.format(self._arousal)
-        value = value + '\nlabels : {0:s}, {1:s}'.format(labels[0], labels[1])
-
-        return value
-
-    def getComponents(self): return self._valence, self._arousal
+class EPosition(Enum):
+    QUAD1 = 0
+    QUAD2 = 1
+    QUAD3 = 2
+    QUAD4 = 3
 
     @staticmethod
-    def _radToDeg(rad): return rad * 180 / np.pi
+    def encode(v: Vec2D) -> Enum:
+        angle = v.getAngle(rad=False)
+        if angle >= 0 and angle <= 90:
+            return EPosition.QUAD1
+        elif angle >= 90 and angle <= 180:
+            return EPosition.QUAD2
+        elif angle >= 180 and angle <= 360:
+            return EPosition.QUAD3
+        else:
+            return EPosition.QUAD4
 
-    def getVector(self): return cp.copy(self._vector)
+    # TODO python 3.10 supports match-case
+    @staticmethod
+    def decode(quadrant: Enum) -> Tuple[str, str]:
+        if quadrant == EPosition.QUAD1:
+            return VALENCE_RIGHT, AROUSAL_UP
+        elif quadrant == EPosition.QUAD2:
+            return VALENCE_LEFT, AROUSAL_UP
+        elif quadrant == EPosition.QUAD3:
+            return VALENCE_LEFT, AROUSAL_DOWN
+        elif quadrant == EPosition.QUAD4:
+            return VALENCE_RIGHT, AROUSAL_DOWN
+        else:
+            raise TypeError('Unsupported value!')
 
-    def getDeg(self): return Scherer._radToDeg(self.getRad())
+    @staticmethod
+    def getQuad(encoding: Enum) -> str:
+        if encoding == EPosition.QUAD1:
+            return 'Quad I'
+        elif encoding == EPosition.QUAD2:
+            return 'Quad II'
+        elif encoding == EPosition.QUAD3:
+            return 'Quad III'
+        elif encoding == EPosition.QUAD4:
+            return 'Quad IV'
+        else:
+            raise TypeError('Unsupported value!')
 
-    def getRad(self):
-        angle = np.arctan2(self._arousal, self._valence)
-        if angle < 0: angle = angle + 2 * np.pi
-        return angle
+class Scherer2D():
+    def __init__(self, valence: np.double, arousal: np.double):
+        if valence == 0 and arousal == 0:
+            raise ValueError('Both inputs cannot be zero!')
+        self._data = Vec2D(valence, arousal)
     
-    def getLabels(self):
-        theta = self.getRad()
-        degs = self.getDeg()
-        res = list()
-        
-        # valence - good / bad 
-        ## happy
-        if theta >= labels['valence']['happy'][0] and theta <= labels['valence']['happy'][1]:
-            res.append('happy')
-        ## sad 
-        else:
-            res.append('sad')
+    def getIntensity(self, ord: Union[int, str] = None) -> np.double:
+        return self._data.norm(ord)
 
-        # arousal - engaged / lethargic
-        ## awake / aroused
-        if theta >= labels['arousal']['awake'][0] and theta <= labels['arousal']['awake'][1]:
-            res.append('awake')
-        ## asleep / passive
-        else:
-            res.append('asleep')
-        return res, degs
+    def getDirection(self, rad: bool = True) -> np.double:
+        return self._data.getAngle(rad)
+
+    def normalize(self, set: bool = True) -> Union[Vec2D, None]:
+        return self._data.normalize(set)
+    
+    def getPosEncoding(self):
+        return EPosition.encode(self._data)
+    
+    def __repr__(self) -> str:
+        pos = self.getPosEncoding()
+        dim1, dim2 = EPosition.decode(pos)
+        quad = EPosition.getQuad(pos)
+        valence, arousal = self._data.getComponents()
+        intensity, angle  = self._data.polar(rad=False)
+        return 'valence  : {0:>7s}  ({1:^8.3f})\narousal  : {2:>7s}  ({3:^8.3f})\nintensity: {4:>7.2f}\nangle    : {5:>7.2f}° ({6:^8s})'.format(dim1, valence, dim2, arousal, intensity, angle, quad)

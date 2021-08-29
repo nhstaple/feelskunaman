@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
-        "./helper",
-        "./tasks"
+        "./helpers",
+        "./tasks",
+        "./parsers"
     ]
 }
