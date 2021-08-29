@@ -87,10 +87,8 @@ def DrawVectors(title: str, vectors: list, data: list):
     ax.set_aspect('equal')
     
     # figure labels
-    ax.set_xlabel(xlabel='valence')
     plt.annotate('happy', xy=(1.15, 0))
     plt.annotate('sad', xy=(-1.15, 0))
-    ax.set_ylabel(ylabel='arousal')
     plt.annotate('awake', xy=(0, 1.15))
     plt.annotate('asleep', xy=(0, -1.15))
 

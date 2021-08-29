@@ -44,7 +44,7 @@ def parsePlaylist(args: Namespace):
             sys.exit(-1)
 
         if 'playlist' in task:
-            computePlaylist(args.task, task['playlist'], seed, num)
+            computePlaylist(task['playlist'], seed, num)
             # spotify.GetAnalysis(res['songIDs'][0], True)
 
 def parseSong(args: Namespace):
