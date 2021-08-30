@@ -2,7 +2,7 @@
 from argparse import Namespace
 from typing import Tuple
 from enum import Enum
-import tasks.track as track
+from tasks import track, album
 
 class EResource(Enum):
     TRACK = 0
@@ -30,5 +30,7 @@ def execute(args: Namespace):
 
     if resource == EResource.TRACK:
         track.execute(args)
+    elif resource == EResource.ALBUM:
+        album.execute(args)
     else:
-        raise TypeError('Only track is supported!')
+        raise TypeError('Only track and albums are supported!')

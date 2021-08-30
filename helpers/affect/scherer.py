@@ -66,12 +66,32 @@ class Scherer2D():
     def getDirection(self, rad: bool = True) -> np.double:
         return self._data.getAngle(rad)
 
+    def getAngle(self, rad: bool = True) -> str:
+        if rad: return '{:5.2f}π'.format(self._data.getAngle(rad) / np.pi)
+        else  : return '{:5.2f}°'.format(self._data.getAngle(rad))
+    
     def normalize(self, set: bool = True) -> Union[Vec2D, None]:
         return self._data.normalize(set)
     
     def getPosEncoding(self):
         return EPosition.encode(self._data)
     
+    def getQuad(self):
+        return EPosition.getQuad(self.getPosEncoding())
+
+    def getLabels(self):
+        return EPosition.decode(
+            EPosition.encode(self._data)
+        )
+
+    def getValence(self):
+        val, aro = self._data.getComponents()
+        return val
+
+    def getArousal(self):
+        val, aro = self._data.getComponents()
+        return aro
+
     def __repr__(self) -> str:
         pos = self.getPosEncoding()
         dim1, dim2 = EPosition.decode(pos)
