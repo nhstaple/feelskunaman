@@ -1,22 +1,18 @@
 # FKM: *Feels Kuna Man*
-A tool for Music Emotion Recognition (MER) using a Python wrapper for Spotify's API.
-
-Independent post-baccalaureate research by Nick Stapleton. For Kunaveer, a friend.
-
 ## Abstract
-Music emotion recognition (MER) is influenced by an individual's environmental factors. And while there is a wealth of analysis using Western music, it is rare to find literature in machine learning that examines non-Western music. This is problematic because the academic community has not given equal weight to the human experience of peoples from marginalized communities.
+An individual's environment influences factors in music emotion recognition (MER.) And while there is a wealth of analysis using Western music, it is rare to find literature in machine learning that examines non-Western music. This is problematic because the academic community has not given equal weight to the human experience of people form marginalized communities.
 
-The goal of this work is to remedy the imblance of cultures in MER by providing a proof-of-concept framework to enable the analysis of non-Western music. This project contributes *emotives* as a computational abstraction of affetice semantic space, and presents visualization of data from diverse musics of Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica. Future work is called for with actionable data and robust open-source music information retrieval (MIR) framworks to examine the potential of universal affective components of music, with potential applications to psychiatry treatments.
+The goal of this work is to remedy the imbalance of cultures in MER by providing a proof-of-concept framework to enable the analysis of non-Western music. This project contributes *emotives* as a computational abstraction of affective semantic space, and presents visualization of data from diverse musics of Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica. Future work calls for actionable data and robust open-source music information retrieval (MIR) frameworks to examine the potential of universal affective components of music, with potential applications to psychiatry treatments.
 
 ## Motivation
-Experiments in MER by psychologists have demonstrated the capability for humans to non-trivially recognize the same emotions across cultural boundaries [1]. Furthermore, additional experiments suggest a universal underlying physiological response that transends sociophyscological conditioning [2]. These findings hint at the possibility that music can be used to invoked similar emotional responses to any listener independent of their cultural background. This potential reality points towards a non-trivial universal framework that can encode affective information through musical data. However, due to the subjectivity of emotion the resolution of the suggested framework can only increase in efficiency by taking an individual's personal preference and cultural background into account.
+Experiments in MER by psychologists have demonstrated the human ability to non-trivially recognize the same emotions across cultural boundaries [1]. Furthermore, more experiments suggest a universal underlying physiological response that transcends socio-psychological conditioning [2]. These findings hint at the possibility that music can invoke similar emotional responses to any listener independent of their cultural background. This potential reality points towards a non-trivial universal framework that can encode affective information through musical data. However, due to subjective emotions the resolution and efficiency of the suggested framework increases by taking an individual's personal preference and cultural background into account.
 
 This project aims to examines to provide a framework to anaylze and visualize affective information of music through Spotify's API.
 
 ## Methodology
-While 3D models of semantic space have been demonstrated to be effective in music recommendation [4], a 2D valence-arousal model is used for the sake of visaulization. Arousal is estimated by `danceability` in Spotify's API rather than `energy` as explored by [3].
+While 3D models of semantic space demonstrates effectiveness in music recommendation [4], a 2D valence-arousal model enables visualization. In this work, `danceability` estimates arousal in Spotify's API instead of `energy` as explored by [3].
 
-This project contributes a formalized unit for affective computation referred to as *emotives*, see module `helpers.affect.scherer`. An emotive, a unit of emotion [5], is an abstraction for vectors in affective semantic space, and the source code allows for the renaming of emotional labels and the substitution of valence and arousal. Emotions are classified broadly by their quadrants:
+This project contributes a formalized unit for affective computation referred to as *emotives*, see module `helpers.affect.scherer`. An emotive, a unit of emotion [5], is an abstraction for vectors in affective semantic space, and the source code allows for the renaming of emotional labels and the substitution of valence and arousal. Quadrants broadly classify emotions in this work:
 
 * Valence: happy for the first and fourth quadrants, and sad for the second and third quadrants.
 * Arousal: awake for the first and second quadrats, and bored for the third and fourth quadrants.
@@ -31,7 +27,7 @@ Information is provided from Spotify's API through the `helpers.spotify.client` 
 * playlists (limited by 100 songs)
 
 ### Validation
-The data in the following results were carefully selected by the author. Individual songs are represented as triangles, and the center mass of each set of songs is represented by a circle. 
+The data in the following results were carefully selected by the author. Individual songs are represented as triangles, and the mean of each set of songs is represented by a circle. 
 
 #### Quadrant I ($+$valence, $+$arousal)
 The songs in the first quadrant are meant to represent the range of emotions in: happy, awake.
@@ -265,7 +261,7 @@ angle    :   45.10° ( Quad I )
 ```
 
 ## Future Work
-This project was intended to quickly gather emotional information of music through Spotify's API. This approach is limited by Spotify's proprietary music information retrieval software (echonest.) While analyis of Thai music was succesful enough to produce a modest classifier [3], an open source solution combined with raw actionable non-Western source music is required for deeper analysis of universal MER. Combined with efforts to identify individual emotive units in songs [5], rather than assigning labels to whole songs, could gather better training data for machine learning models [4]. Applications of MER systems include treatment for psychiatric conditions.
+This project aims to quickly gather emotional information of music through Spotify's API. This approach is not general because of Spotify's proprietary music information retrieval software (echonest.) While analysis of Thai music was succesful enough to produce a modest classifier [3], deeper analysis of universal MER necessitates an open source solution combined with raw actionable non-Western source music. Combined with efforts to identify individual emotive units in songs [5], rather than assigning labels to whole songs, could gather better training data for machine learning models [4]. Applications of MER systems include treatment for psychiatric conditions.
 
 ## Citations
 ```
