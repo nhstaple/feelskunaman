@@ -5,7 +5,7 @@ from parsers.feelsparser import FeelsParser
 import tasks.analyze as BigBrain
 
 def main(args: Namespace):
-    print('\nFeels Kuna Man - a tool to check on the homie\'s feels using the SpotifyAPI\n')
+    print('\nFeels Kuna Man - a tool for Music Emotion Recognition\n')
     BigBrain.execute(args)
 
 if __name__ == '__main__':

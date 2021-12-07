@@ -11,3 +11,6 @@ def execute(args: Namespace):
         print(song.name)
         print('by ' + song.artist)
         print(song.emotive)
+    
+    if args.plot:
+        print('WARNING: plotting for individual tracks is currently not supported')

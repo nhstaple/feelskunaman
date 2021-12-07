@@ -6,7 +6,7 @@ from typing import DefaultDict
 def FeelsParser():
     parser = argparse.ArgumentParser(
         prog='Feels Kuna Man',
-        description='A simple program to predict user emotions based off Spotify playlists'
+        description='A simple program to analyze emotions in music with Spotify\'s API'
     )
 
     # the URL pointing to Spotify data

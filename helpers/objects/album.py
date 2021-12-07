@@ -50,4 +50,4 @@ class Album():
         return val
 
     def plot(self):
-        DrawVectors(self.name, self.getVectors(), self._tracks)
+        DrawVectors('Album ' + self.name, self.getVectors(), self._tracks)

@@ -15,3 +15,6 @@ def execute(args:Namespace):
         print('by ' + playlist.owner)
         print(playlist.emotive.__repr__().replace('valence  ', 'valence μ').replace('arousal  ', 'arousal μ'))
 
+    if args.plot:
+        playlist.plot()
+
