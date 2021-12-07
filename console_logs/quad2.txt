@@ -1,0 +1,38 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+PLAYLIST.meta
+  name       : Quadrant II
+  by         : nicholas.stapleton
+  num tracks : 3
+  length     : 13m 14s
+  url        : https://open.spotify.com/playlist/6gNomfqtRg5LQxBHXiF1hs
+PLAYLIST.tracks
+  Guess Who I Saw Today - Remastered/2004
+  by Nancy Wilson
+  on Something Wonderful
+    valence  :     sad  ( -0.620 )
+    arousal  :   awake  ( 0.178  )
+    intensity:    0.65
+    angle    :  163.98° (Quad II )
+  Blue Rondo à la Turk
+  by The Dave Brubeck Quartet
+  on Time Out
+    valence  :     sad  ( -0.064 )
+    arousal  :   awake  ( 0.176  )
+    intensity:    0.19
+    angle    :  109.98° (Quad II )
+  Banana Boat (Day-O)
+  by Harry Belafonte
+  on Calypso
+    valence  :     sad  ( -0.162 )
+    arousal  :   awake  ( 0.594  )
+    intensity:    0.62
+    angle    :  105.26° (Quad II )
+PLAYLIST.emotions
+  valence  :     sad  ( -0.282 )
+  arousal  :   awake  ( 0.316  )
+  intensity:    0.42
+  angle    :  131.75° (Quad II )
+

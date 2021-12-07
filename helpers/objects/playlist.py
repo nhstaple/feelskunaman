@@ -34,11 +34,11 @@ class Playlist():
     
     def __repr__(self, show_tracks: bool = True) -> str:
         val = 'PLAYLIST.meta\n'
-        val = val + '  name       :{:>s}\n'.format(self.name)
-        val = val + '  by         :{:>s}\n'.format(self.owner)
-        val = val + '  num tracks :{:>d}\n'.format(self.num_tracks)
-        val = val + '  length     :{:>s}\n'.format(decode_ms(self.total_time_ms))
-        val = val + '  url        :{:>s}\n'.format(self.url)
+        val = val + '  name       : {:>s}\n'.format(self.name)
+        val = val + '  by         : {:>s}\n'.format(self.owner)
+        val = val + '  num tracks : {:>d}\n'.format(self.num_tracks)
+        val = val + '  length     : {:>s}\n'.format(decode_ms(self.total_time_ms))
+        val = val + '  url        : {:>s}\n'.format(self.url)
         if show_tracks:
             val = val + 'PLAYLIST.tracks\n'
             for track in self._tracks:

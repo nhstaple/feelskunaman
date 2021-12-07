@@ -1,0 +1,38 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+PLAYLIST.meta
+  name       : Quadrant IV
+  by         : nicholas.stapleton
+  num tracks : 3
+  length     : 11m 2s
+  url        : https://open.spotify.com/playlist/5iaYVzoF3DDe1YgNwaGLhL
+PLAYLIST.tracks
+  Rio Grande
+  by Storm Weather Shanty Choir
+  on Way Hey (And Away We'll Go)
+    valence  :     sad  ( 0.076  )
+    arousal  :   bored  ( -0.292 )
+    intensity:    0.30
+    angle    :  284.59° (Quad III)
+  Through the Roof 'n' Underground
+  by Gogol Bordello
+  on Multi Kontra Culti vs Irony
+    valence  :     sad  ( 0.460  )
+    arousal  :   bored  ( -0.066 )
+    intensity:    0.46
+    angle    :  351.84° (Quad III)
+  Sgt. Pepper's Lonely Hearts Club Band - Remastered 2009
+  by The Beatles
+  on Sgt. Pepper's Lonely Hearts Club Band (Remastered)
+    valence  :     sad  ( 0.166  )
+    arousal  :   bored  ( -0.098 )
+    intensity:    0.19
+    angle    :  329.44° (Quad III)
+PLAYLIST.emotions
+  valence  :     sad  ( 0.234  )
+  arousal  :   bored  ( -0.152 )
+  intensity:    0.28
+  angle    :  326.99° (Quad III)
+

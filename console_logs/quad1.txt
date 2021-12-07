@@ -1,0 +1,38 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+PLAYLIST.meta
+  name       : Quadrant I
+  by         : nicholas.stapleton
+  num tracks : 3
+  length     : 9m 40s
+  url        : https://open.spotify.com/playlist/6Z4hdXA63y3i5L7lE9IuZH
+PLAYLIST.tracks
+  I've Got a Woman
+  by Ray Charles
+  on Ray Charles (aka: Hallelujah, I Love Her So)
+    valence  :   happy  ( 0.330  )
+    arousal  :   awake  ( 0.112  )
+    intensity:    0.35
+    angle    :   18.75° ( Quad I )
+  Como te extraño mi amor
+  by Café Tacvba
+  on Avalancha de éxitos
+    valence  :   happy  ( 0.834  )
+    arousal  :   awake  ( 0.582  )
+    intensity:    1.02
+    angle    :   34.91° ( Quad I )
+  Your Love
+  by Mick Jenkins
+  on Wave[s]
+    valence  :   happy  ( 0.278  )
+    arousal  :   awake  ( 0.304  )
+    intensity:    0.41
+    angle    :   47.56° ( Quad I )
+PLAYLIST.emotions
+  valence  :   happy  ( 0.481  )
+  arousal  :   awake  ( 0.333  )
+  intensity:    0.58
+  angle    :   34.69° ( Quad I )
+

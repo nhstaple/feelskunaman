@@ -1,0 +1,38 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+PLAYLIST.meta
+  name       : Quadrant III
+  by         : nicholas.stapleton
+  num tracks : 3
+  length     : 17m 25s
+  url        : https://open.spotify.com/playlist/6sHwmWqfay5v2WFbmqOeBL
+PLAYLIST.tracks
+  Claire de lune
+  by Claude Debussy
+  on Träumerei - Liebestraum - Für Elise - Clair de lune - Gymnopédie - Sony Classical Masters
+    valence  :     sad  ( -0.927 )
+    arousal  :   bored  ( -0.270 )
+    intensity:    0.97
+    angle    :  196.24° (Quad III)
+  The Sound of Silence
+  by Pat Metheny
+  on What's It All About
+    valence  :     sad  ( -0.920 )
+    arousal  :   bored  ( -0.142 )
+    intensity:    0.93
+    angle    :  188.77° (Quad III)
+  Within You Without You - Remastered 2009
+  by The Beatles
+  on Sgt. Pepper's Lonely Hearts Club Band (Remastered)
+    valence  :     sad  ( -0.292 )
+    arousal  :   bored  ( -0.296 )
+    intensity:    0.42
+    angle    :  225.39° (Quad III)
+PLAYLIST.emotions
+  valence  :     sad  ( -0.713 )
+  arousal  :   bored  ( -0.236 )
+  intensity:    0.75
+  angle    :  198.31° (Quad III)
+
