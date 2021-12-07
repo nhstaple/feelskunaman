@@ -198,7 +198,7 @@ Flags can be supplied to the terminal:
 
 ### Example
 ```
-python3 main.py --plot --normalize https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM?si=4c6b5e3216714432
+python3 main.py --plot --normalize https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
 
 Feels Kuna Man - a tool for Music Emotion Recognition
 
