@@ -188,12 +188,28 @@ PLAYLIST.emotions
 ## Usage
 General usage follows:
 ```
-python3 main.py <A SINGLE SPOTIFY URL>
+python3 main.py <FLAGS> <ONE SPOTIFY URL>
 ```
 Flags can be supplied to the terminal:
 
 * `--print` displays detailed information for each item
 * `--plot` provides an interactable figure that displays information for each item 
+* `--normalize` transforms points on the graph to fall along the unit circle (when `--plot` is set)
+
+### Example
+```
+python3 main.py --plot --normalize https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM?si=4c6b5e3216714432
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Layla And Other Assorted Love Songs (Remastered 2010)
+by Derek & The Dominos
+valence  :   happy  ( 0.142  )
+arousal  :   bored  ( -0.143 )
+intensity:    0.20
+angle    :  314.71° (Quad IV )
+```
+![](console_logs/layla.png)
 
 ## Results
 This section analyzes the emotions from individual artists in the musics of Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica.
