@@ -16,7 +16,7 @@ class EPosition(Enum):
     QUAD4 = 3
 
     @staticmethod
-    def encode(v: Vec2D) -> Enum:
+    def encode(v:Vec2D) -> Enum:
         angle = v.getAngle(rad=False)
         if angle >= 0 and angle <= 90:
             return EPosition.QUAD1
@@ -29,7 +29,7 @@ class EPosition(Enum):
 
     # TODO python 3.10 supports match-case
     @staticmethod
-    def decode(quadrant: Enum) -> Tuple[str, str]:
+    def decode(quadrant:Enum) -> Tuple[str, str]:
         if quadrant == EPosition.QUAD1:
             return VALENCE_RIGHT, AROUSAL_UP
         elif quadrant == EPosition.QUAD2:
@@ -42,7 +42,7 @@ class EPosition(Enum):
             raise TypeError('Unsupported value!')
 
     @staticmethod
-    def getQuad(encoding: Enum) -> str:
+    def getQuad(encoding:Enum) -> str:
         if encoding == EPosition.QUAD1:
             return 'Quad I'
         elif encoding == EPosition.QUAD2:
@@ -55,22 +55,22 @@ class EPosition(Enum):
             raise TypeError('Unsupported value!')
 
 class Scherer2D():
-    def __init__(self, valence: np.double, arousal: np.double):
+    def __init__(self, valence:np.double, arousal:np.double):
         if valence == 0 and arousal == 0:
             raise ValueError('Both inputs cannot be zero!')
-        self._data = Vec2D(valence, arousal)
+        self._data:Vec2D = Vec2D(valence, arousal)
     
-    def getIntensity(self, ord: Union[int, str] = None) -> np.double:
+    def getIntensity(self, ord:Union[int, str] = None) -> np.double:
         return self._data.norm(ord)
 
-    def getDirection(self, rad: bool = True) -> np.double:
+    def getDirection(self, rad:bool = True) -> np.double:
         return self._data.getAngle(rad)
 
-    def getAngle(self, rad: bool = True) -> str:
+    def getAngle(self, rad:bool = True) -> str:
         if rad: return '{:5.2f}π'.format(self._data.getAngle(rad) / np.pi)
         else  : return '{:5.2f}°'.format(self._data.getAngle(rad))
     
-    def normalize(self, set: bool = True) -> Union[Vec2D, None]:
+    def normalize(self, set:bool = True) -> Union[Vec2D, None]:
         return self._data.normalize(set)
     
     def getPosEncoding(self):
@@ -98,4 +98,10 @@ class Scherer2D():
         quad = EPosition.getQuad(pos)
         valence, arousal = self._data.getComponents()
         intensity, angle  = self._data.polar(rad=False)
-        return 'valence  : {0:>7s}  ({1:^8.3f})\narousal  : {2:>7s}  ({3:^8.3f})\nintensity: {4:>7.2f}\nangle    : {5:>7.2f}° ({6:^8s})'.format(dim1, valence, dim2, arousal, intensity, angle, quad)
+
+        val = str()
+        val = val + 'valence  : {0:>7s}  ({1:^8.3f})\n'.format(dim1, valence)
+        val = val + 'arousal  : {0:>7s}  ({1:^8.3f})\n'.format(dim2, arousal)
+        val = val + 'intensity: {0:>7.2f}\n'.format(intensity)
+        val = val + 'angle    : {0:>7.2f}° ({1:^8s})'.format(angle, quad)
+        return val

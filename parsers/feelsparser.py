@@ -1,6 +1,7 @@
 
 import argparse
 import os
+from typing import DefaultDict
 
 def FeelsParser():
     parser = argparse.ArgumentParser(
@@ -27,6 +28,13 @@ def FeelsParser():
         '--seed',
         type=int,
         default=-1
+    )
+
+    # display info
+    parser.add_argument(
+        '--print',
+        action='store_true',
+        default=False
     )
 
     # displays the item(s)

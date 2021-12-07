@@ -72,8 +72,8 @@ class Client:
             data.append(song)
 
             emotive = Scherer(
-                valence= 2 * song['valence'] - 1,
-                arousal= 2 * song['danceability'] - 1
+                valence=2 * song['valence'] - 1,
+                arousal=2 * song['danceability'] - 1
             )
 
             vectors.append(emotive)

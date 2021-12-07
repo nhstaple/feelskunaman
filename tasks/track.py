@@ -1,7 +1,13 @@
 
 from argparse import Namespace
 from helpers.spotify.client import Client
+from helpers.objects.track import Track
 
 def execute(args: Namespace):
-    song = Client().getTrack(args.url)
-    print(song)
+    song: Track = Client().getTrack(args.url)
+    if args.print:
+        print(song)
+    else:
+        print(song.name)
+        print('by ' + song.artist)
+        print(song.emotive)

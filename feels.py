@@ -1,6 +1,5 @@
 
 from argparse import Namespace
-from typing import Type
 from parsers.feelsparser import FeelsParser
 
 import tasks.analyze as BigBrain

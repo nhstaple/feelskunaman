@@ -2,25 +2,25 @@
 from helpers.affect.scherer import Scherer2D
 from helpers.music.tracks import decode_mode, decode_key, decode_ms
 
-
 class Track():
-    def __init__(self, features: dict):
-        self.emotive     = Scherer2D(
+    def __init__(self, features:dict):
+        self.emotive: Scherer2D = Scherer2D(
             features['valence'], features['arousal']
         )
-        self.name: str = features['name']
-        self.artist: str = features['artist']
-        self.artist_id: str = features['artist_id']
-        self.album: str = features['album']
-        self.album_id: str = features['album_id']
-        self.duration_ms: float = features['duration_ms']
-        self.tempo:int = features['tempo']
-        self.mode: int = features['mode']
-        self.key: int = features['key']
-        self.url: str = features['url']
-        self.id: str = str.split(self.url, '/')[-1]
-        self.popularity: int = features['popularity']
-    
+        self.name:str          = features['name']
+        self.artist:str        = features['artist']
+        self.artist_id:str     = features['artist_id']
+        self.album:str         = features['album']
+        self.album_id:str      = features['album_id']
+        self.duration_ms:float = features['duration_ms']
+        self.tempo:int         = features['tempo']
+        self.mode:int          = features['mode']
+        self.key:int           = features['key']
+        self.url:str           = features['url']
+        self.id:str            = str.split(self.url, '/')[-1]
+        self.popularity:int    = features['popularity']
+        self.explicit:bool     = features['explicit']
+
     def __repr__(self) -> str:
         labels = self.emotive.getLabels()
         intensity = '{:.2f}'.format(self.emotive.getIntensity())
