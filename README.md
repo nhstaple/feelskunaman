@@ -243,7 +243,7 @@ intensity:    0.90
 angle    :   32.72° ( Quad I )
 ```
 
-### Mariachi Divas de Cindy Shea, Mexico (mariachi)
+### Mariachi Divas de Cindy Shea, California/Mexico (mariachi)
 ![](console_logs/mariachi.png)
 ```
 valence μ:   happy  ( 0.033  )
