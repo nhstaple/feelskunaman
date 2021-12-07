@@ -1,9 +1,9 @@
 
-from helpers.affect.scherer import Scherer2D
+from helpers.affect.scherer import Emotive2D
 from helpers.music.tracks import decode_mode, decode_key, decode_ms
 class Track():
     def __init__(self, features:dict):
-        self.emotive: Scherer2D = Scherer2D(
+        self.emotive: Emotive2D = Emotive2D(
             features['valence'], features['arousal']
         )
         self.name:str          = features['name']

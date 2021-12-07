@@ -1,0 +1,11 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+This Is Mariachi Divas de Cindy Shea
+This is Mariachi Divas de Cindy Shea. The essential tracks, all in one playlist.
+by Spotify
+valence μ:   happy  ( 0.033  )
+arousal μ:   bored  ( -0.062 )
+intensity:    0.07
+angle    :  297.67° (Quad IV )

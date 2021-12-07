@@ -2,7 +2,7 @@
 from argparse import Namespace
 from parsers.feelsparser import FeelsParser
 
-import tasks.analyze as BigBrain
+import tasks.index as BigBrain
 
 def main(args: Namespace):
     print('\nFeels Kuna Man - a tool for Music Emotion Recognition\n')

@@ -1,5 +1,5 @@
 
-from helpers.affect.scherer import Scherer2D
+from helpers.affect.scherer import Emotive2D
 from helpers.music.tracks import decode_ms
 
 from helpers.visualization.plotting import DrawVectors
@@ -27,7 +27,7 @@ class Playlist():
         for emotive in emotions:
             u_v = u_v + emotive.getValence()
             u_a = u_a + emotive.getArousal()
-        self.emotive = Scherer2D(u_v / self.num_tracks, u_a / self.num_tracks)
+        self.emotive = Emotive2D(u_v / self.num_tracks, u_a / self.num_tracks)
     
     def getVectors(self) -> list:
         return [ song.emotive for song in self._tracks]
@@ -45,11 +45,11 @@ class Playlist():
                 val = val + '  {:s}\n'.format(track.name)
                 val = val + '  by {:s}\n'.format(track.artist)
                 val = val + '  on {:s}\n'.format(track.album)
-                val = val + '    {}\n'.format(Scherer2D.__repr__(track.emotive).replace('\n', '\n    '))
+                val = val + '    {}\n'.format(Emotive2D.__repr__(track.emotive).replace('\n', '\n    '))
         val = val + 'PLAYLIST.emotions\n'
-        val = val + '  {}\n'.format(Scherer2D.__repr__(self.emotive).replace('\n', '\n  '))
+        val = val + '  {}\n'.format(Emotive2D.__repr__(self.emotive).replace('\n', '\n  '))
         return val
 
-    def plot(self):
-        DrawVectors('Playlist ' + self.name, self.getVectors(), self._tracks)
+    def plot(self, normalize:bool):
+        DrawVectors('Playlist ' + self.name, self.getVectors(), self._tracks, normalize)
 

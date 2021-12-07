@@ -1,0 +1,11 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+This Is Ibrahim Ferrer
+This is Ibrahim Ferrer. The essential tracks, all in one playlist.
+by Spotify
+valence μ:   happy  ( 0.389  )
+arousal μ:   awake  ( 0.133  )
+intensity:    0.41
+angle    :   18.94° ( Quad I )

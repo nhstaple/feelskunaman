@@ -13,4 +13,4 @@ def execute(args: Namespace):
         print(album.emotive)
 
     if args.plot:
-        album.plot()
+        album.plot(args.normalize)

@@ -1,10 +1,8 @@
 
-import argparse
-import os
-from typing import DefaultDict
+from argparse import ArgumentParser
 
-def FeelsParser():
-    parser = argparse.ArgumentParser(
+def FeelsParser() -> ArgumentParser:
+    parser:ArgumentParser = ArgumentParser(
         prog='Feels Kuna Man',
         description='A simple program to analyze emotions in music with Spotify\'s API'
     )
@@ -23,13 +21,6 @@ def FeelsParser():
         type=int
     )
 
-    # sets the seed for shuffling the playlist when --num is less than the total songs in a playlist
-    parser.add_argument(
-        '--seed',
-        type=int,
-        default=-1
-    )
-
     # display info
     parser.add_argument(
         '--print',
@@ -44,17 +35,10 @@ def FeelsParser():
         action='store_true'
     )
 
-    # creates an interactive plot
-    parser.add_argument(
-        '--interactive',
-        help='creates an interactive plot if plot is true',
-        action='store_true'
-    )
-
-    # noramlizes values on plot
+    # normalizes vectors when plotting
     parser.add_argument(
         '--normalize',
-        help='normalizes values when plot is true',
+        help='normalizes emotives when plot is set',
         action='store_true'
     )
 

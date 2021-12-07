@@ -1,0 +1,11 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+This Is Huun-Huur-Tu
+This is Huun-Huur-Tu. The essential tracks, all in one playlist.
+by Spotify
+valence μ:     sad  ( -0.489 )
+arousal μ:   bored  ( -0.380 )
+intensity:    0.62
+angle    :  217.89° (Quad III)

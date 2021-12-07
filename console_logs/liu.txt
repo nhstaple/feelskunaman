@@ -1,0 +1,9 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+The Soul Of Pipa (3) - Pipa Music From Chinese Folk Roots
+by Liu Fang
+valence  :     sad  ( -0.132 )
+arousal  :   bored  ( -0.122 )
+intensity:    0.18
+angle    :  222.79° (Quad III)

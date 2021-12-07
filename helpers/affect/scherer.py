@@ -22,7 +22,7 @@ class EPosition(Enum):
             return EPosition.QUAD1
         elif angle >= 90 and angle <= 180:
             return EPosition.QUAD2
-        elif angle >= 180 and angle <= 360:
+        elif angle >= 180 and angle <= 270:
             return EPosition.QUAD3
         else:
             return EPosition.QUAD4
@@ -54,7 +54,7 @@ class EPosition(Enum):
         else:
             raise TypeError('Unsupported value!')
 
-class Scherer2D():
+class Emotive2D():
     def __init__(self, valence:np.double, arousal:np.double):
         if valence == 0 and arousal == 0:
             raise ValueError('Both inputs cannot be zero!')
@@ -70,7 +70,7 @@ class Scherer2D():
         if rad: return '{:5.2f}π'.format(self._data.getAngle(rad) / np.pi)
         else  : return '{:5.2f}°'.format(self._data.getAngle(rad))
     
-    def normalize(self, set:bool = True) -> Union[Vec2D, None]:
+    def normalize(self, set:bool = False) -> Union[Vec2D, None]:
         return self._data.normalize(set)
     
     def getPosEncoding(self):

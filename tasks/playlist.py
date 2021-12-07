@@ -16,5 +16,5 @@ def execute(args:Namespace):
         print(playlist.emotive.__repr__().replace('valence  ', 'valence μ').replace('arousal  ', 'arousal μ'))
 
     if args.plot:
-        playlist.plot()
+        playlist.plot(args.normalize)
 

@@ -1,0 +1,11 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+This Is Mahlathini & The Mahotella Queens
+All the essentials from Mahlathini & The Mahotella Queens.
+by Spotify
+valence μ:   happy  ( 0.755  )
+arousal μ:   awake  ( 0.485  )
+intensity:    0.90
+angle    :   32.72° ( Quad I )

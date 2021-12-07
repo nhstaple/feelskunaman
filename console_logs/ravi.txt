@@ -1,0 +1,9 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+The Very Best of Ravi Shankar
+by Ravi Shankar
+valence  :     sad  ( -0.168 )
+arousal  :   bored  ( -0.072 )
+intensity:    0.18
+angle    :  203.19° (Quad III)

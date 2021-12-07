@@ -1,131 +1,38 @@
-# feelskunaman
-For Kunaveer, a friend
-
-## Dependencies
-
-* Python 3
-* [SpotiPy](https://spotipy.readthedocs.io/en/2.18.0/)
-* [MLPCursors](https://mplcursors.readthedocs.io/en/stable/)
-* [Seaborn](https://seaborn.pydata.org/installing.html)
-* [Matplot](https://pypi.org/project/matplotlib/)
-
-## About
+# FKM: *Feels Kuna Man*
 A tool for Music Emotion Recognition (MER) using a Python wrapper for Spotify's API.
 
-Independent post-baccalaureate research by Nick Stapleton.
+Independent post-baccalaureate research by Nick Stapleton. For Kunaveer, a friend.
+
+## Abstract
+Music emotion recognition (MER) is influenced by an individual's environmental factors. And while there is a wealth of analysis using Western music, it is rare to find literature in machine learning that examines non-Western music. The goal of this work is to provide a proof-of-concept framework to enable the analysis of MER in non-Western music. This projects contributes a computational abstraction of affectice semantic space, *emotives*; and presents visualization of data from diverse music from Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica. Future work for actionable data and open-source music information retrieval (MIR) framworks is called for to examine the potential of universal affective components to music, with potential applications to psychiatry treatments.
 
 ## Motivation
-MER is conditioned by an individual's environmental factors. However, experiments by music psychologists have demonstrated the capability for humans to non-trivially recognize the same emotions across cultural boundaries [1]. Furthermore, additional experiments suggest a universal underlying physiological response that transends sociophyscological conditioning [2]. These findings hint at the possibility that music can be used to invoked similar emotional responses to any listener independent of their cultural background. This potential reality points towards a non-trivial universal framework that can encode affective information through musical data. However, due to the subjectivity of emotion the resolution of the suggested framework can only increase in efficiency by taking an individual's personal preference and cultural background into account.
+Experiments in MER by psychologists have demonstrated the capability for humans to non-trivially recognize the same emotions across cultural boundaries [1]. Furthermore, additional experiments suggest a universal underlying physiological response that transends sociophyscological conditioning [2]. These findings hint at the possibility that music can be used to invoked similar emotional responses to any listener independent of their cultural background. This potential reality points towards a non-trivial universal framework that can encode affective information through musical data. However, due to the subjectivity of emotion the resolution of the suggested framework can only increase in efficiency by taking an individual's personal preference and cultural background into account.
 
-Thus, this project aims to examines music via 2-dimensional Scherer space along the dimensions of valence and arousal.
+This project aims to examines to provide a framework to anaylze and visualize affective information of music through Spotify's API.
 
 ## Methodology
-This project examines music via 2-dimensional Scherer space along the dimensions of `valence` and `arousal`, see `helpers.affect.scherer`. These values are transformed from the range `[0, 1`] to `[-1, 1]` through a linear transformation to center about the origin. Results are printed to the terminal through the `--print` command and are visually accessible through the `--plot` command. See [usage](#usage).
+While 3D models of semantic space have been demonstrated to be effective in music recommendation [4], a 2D valence-arousal model is used for the sake of visaulization. Arousal is estimated by `danceability` in Spotify's API rather than `energy` as explored by [3].
 
-`playlists` and `albums` are queried by Spotify's API through the `helpers.spotify.client` submodule. `arousal` is estimated by `danceability` rather than `energy` as explored by [3].
+This project contributes a formalized unit for affective computation referred to as *emotives*, see module `helpers.affect.scherer`. An emotive, a unit of emotion [5], is an abstraction for vectors in affective semantic space, and the source code allows for the renaming of emotional labels and the substitution of valence and arousal. Emotions are classified broadly by their quadrants:
 
-### Spotify API Secret Key
-A secret key from a Spotify developer's account should be stored in `helpers/spotify/supersecret.py` with the format:
-```
-CLIENT_ID  = 'YOUR KEY'
-SECRET_KEY = 'YOUR KEY'
-```
+* Valence: happy for the first and fourth quadrants, and sad for the second and third quadrants.
+* Arousal: awake for the first and second quadrats, and bored for the third and fourth quadrants.
 
-### Supported Spotify structures
+The valence-arousal components of each emotive are provided by Spotify through floating point numbers rangind from $[0, 1]$. For the sake of analysis, these values are linearly transformed about the origin to fall in the range $[-1, 1]$. The position of an emotive is defined in terms of polar coordinates: $(r, \theta)$ where $r$ is the emotive's *intensity*, or vector norm, and $\theta$ is the emotive's *direction*. 
 
+### Music Information Retrieval (Spotify)
+Information is provided from Spotify's API through the `helpers.spotify.client` submodule.
+
+* tracks (plotting is not supported)
 * albums
-* playlists (no more than 100 songs in length)
+* playlists (limited by 100 songs)
 
-## Usage
-This example uses Axis: Bold as Love, by Jimi Hendrix.
-```
-python3 main.py --print --plot https://open.spotify.com/album/3uFZf8rykoHo7XMIQVYW6r
-```
+### Validation
+The data in the following results were carefully selected by the author. Individual songs are represented as triangles, and the center mass of each set of songs is represented by a circle. 
 
-![](./console_logs/bold_as_love.png)
-```
-ALBUM.meta
-  name       : Axis: Bold As Love
-  artist     : Jimi Hendrix
-  num tracks : 13
-  popularity : 67
-  length     : 39m 17s
-  url        : https://open.spotify.com/album/3uFZf8rykoHo7XMIQVYW6r
-ALBUM.tracks
-  Exp
-    valence  :     sad  ( -0.604 )
-    arousal  :   bored  ( -0.182 )
-    intensity:    0.63
-    angle    :  196.77° (Quad III)
-  Up From The Skies
-    valence  :     sad  ( -0.174 )
-    arousal  :   awake  ( 0.318  )
-    intensity:    0.36
-    angle    :  118.69° (Quad II )
-  Spanish Castle Magic
-    valence  :     sad  ( 0.610  )
-    arousal  :   bored  ( -0.190 )
-    intensity:    0.64
-    angle    :  342.70° (Quad III)
-  Wait Until Tomorrow
-    valence  :   happy  ( 0.648  )
-    arousal  :   awake  ( 0.286  )
-    intensity:    0.71
-    angle    :   23.81° ( Quad I )
-  Ain't No Telling
-    valence  :     sad  ( 0.178  )
-    arousal  :   bored  ( -0.190 )
-    intensity:    0.26
-    angle    :  313.13° (Quad III)
-  Little Wing
-    valence  :     sad  ( -0.148 )
-    arousal  :   awake  ( 0.030  )
-    intensity:    0.15
-    angle    :  168.54° (Quad II )
-  If 6 Was 9
-    valence  :     sad  ( -0.014 )
-    arousal  :   bored  ( -0.220 )
-    intensity:    0.22
-    angle    :  266.36° (Quad III)
-  You Got Me Floatin'
-    valence  :     sad  ( 0.588  )
-    arousal  :   bored  ( -0.046 )
-    intensity:    0.59
-    angle    :  355.53° (Quad III)
-  Castles Made of Sand
-    valence  :     sad  ( -0.092 )
-    arousal  :   bored  ( -0.078 )
-    intensity:    0.12
-    angle    :  220.29° (Quad III)
-  She's So Fine
-    valence  :     sad  ( -0.144 )
-    arousal  :   bored  ( -0.246 )
-    intensity:    0.29
-    angle    :  239.66° (Quad III)
-  One Rainy Wish
-    valence  :     sad  ( -0.336 )
-    arousal  :   bored  ( -0.368 )
-    intensity:    0.50
-    angle    :  227.60° (Quad III)
-  Little Miss Lover
-    valence  :   happy  ( 0.810  )
-    arousal  :   awake  ( 0.060  )
-    intensity:    0.81
-    angle    :    4.24° ( Quad I )
-  Bold as Love
-    valence  :     sad  ( 0.192  )
-    arousal  :   bored  ( -0.292 )
-    intensity:    0.35
-    angle    :  303.33° (Quad III)
-ALBUM.emotions
-  valence  :     sad  ( 0.116  )
-  arousal  :   bored  ( -0.086 )
-  intensity:    0.14
-  angle    :  323.56° (Quad III)
-```
-
-### Validation Results
-#### Quadrant I - Happy & Awake
+#### Quadrant I ($+$valence, $+$arousal)
+The songs in the first quadrant are meant to represent the range of emotions in: happy, awake.
 ![](./console_logs/quad1.png)
 ```
 PLAYLIST.meta
@@ -163,7 +70,8 @@ PLAYLIST.emotions
   angle    :   34.69° ( Quad I )
 ```
 
-#### Quadrant II - Sad & Awake
+#### Quadrant II ($-$valence, $+$arousal)
+The songs in the first quadrant are meant to represent the range of emotions in: sad, awake.
 ![](./console_logs/quad2.png)
 ```
 PLAYLIST.meta
@@ -201,7 +109,8 @@ PLAYLIST.emotions
   angle    :  131.75° (Quad II )
 ```
 
-#### Quadrant III - Sad & Bored
+#### Quadrant III ($-$valence, $-$arousal)
+The songs in the third quadrant are meant to represent the range of emotions in: sad, bored.
 ![](./console_logs/quad3.png)
 ```
 PLAYLIST.meta
@@ -239,7 +148,8 @@ PLAYLIST.emotions
   angle    :  198.31° (Quad III)
 ```
 
-#### Quadrant IV - Happy & Bored
+#### Quadrant IV - ($+$valence, $-$arousal)
+The songs in the fourth quadrant are meant to represent the range of emotions in: happy, bored.
 ![](./console_logs/quad4.png)
 ```
 PLAYLIST.meta
@@ -277,8 +187,83 @@ PLAYLIST.emotions
   angle    :  326.99° (Quad III)
 ```
 
+## Usage
+General usage follows:
+```
+python3 main.py <A SINGLE SPOTIFY URL>
+```
+Flags can be supplied to the terminal:
+
+* `--print` displays detailed information for each item
+* `--plot` provides an interactable figure that displays information for each item 
+
+## Results
+This section analyzes the emotions from individual artists in the musics of Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica.
+### Ibrahim Ferrer, Cuba (bolero)
+![](console_logs/ibrahim.png)
+```
+valence μ:   happy  ( 0.389  )
+arousal μ:   awake  ( 0.133  )
+intensity:    0.41
+angle    :   18.94° ( Quad I )
+```
+
+### Ravi Shankar, India (sitar)
+![](console_logs/ravi.png)
+```
+valence  :     sad  ( -0.168 )
+arousal  :   bored  ( -0.072 )
+intensity:    0.18
+angle    :  203.19° (Quad III)
+```
+
+### Liu Feng, China (pipa)
+![](console_logs/liu.png)
+```
+valence  :     sad  ( -0.132 )
+arousal  :   bored  ( -0.122 )
+intensity:    0.18
+angle    :  222.79° (Quad III)
+```
+
+### Huun-Huur-Tur, Tuva (throat singing)
+![](console_logs/huun.png)
+```
+valence μ:     sad  ( -0.489 )
+arousal μ:   bored  ( -0.380 )
+intensity:    0.62
+angle    :  217.89° (Quad III)
+```
+
+### Mahlathini, South Africa (mbaqanga)
+![](console_logs/mahlathini.png)
+```
+valence μ:   happy  ( 0.755  )
+arousal μ:   awake  ( 0.485  )
+intensity:    0.90
+angle    :   32.72° ( Quad I )
+```
+
+### Mariachi Divas de Cindy Shea, Mexico (mariachi)
+![](console_logs/mariachi.png)
+```
+valence μ:   happy  ( 0.033  )
+arousal μ:   bored  ( -0.062 )
+intensity:    0.07
+angle    :  297.67° (Quad IV )
+```
+
+### Black Uhuru, Jamaica (reggae)
+![](console_logs/black.png)
+```
+valence μ:   happy  ( 0.523  )
+arousal μ:   awake  ( 0.524  )
+intensity:    0.74
+angle    :   45.10° ( Quad I )
+```
+
 ## Future Work
-This project was intended to be used to quickly gather emotional information of music through Spotify's API. This approach is limited by Spotify's internal music information retrieval software (echonest) and lacks full transparency. While analyis of Thai music was succesful enough to produce a modest classifier [3], an open source solution combined with raw actionable non-Western source music, is required for deeper analysis of universal MER.
+This project was intended to quickly gather emotional information of music through Spotify's API. This approach is limited by Spotify's proprietary music information retrieval software (echonest.) While analyis of Thai music was succesful enough to produce a modest classifier [3], an open source solution combined with raw actionable non-Western source music is required for deeper analysis of universal MER. Combined with efforts to identify individual emotive units in songs [5], rather than assigning labels to whole songs, could gather better training data for machine learning models [4]. Applications of MER systems include treatment for psychiatric conditions.
 
 ## Citations
 ```
@@ -286,5 +271,25 @@ This project was intended to be used to quickly gather emotional information of 
 
 [2] Egermann, Hauke, et al. “Music Induces Universal Emotion-Related Psychophysiological Responses: Comparing Canadian Listeners To Congolese Pygmies.” Frontiers in Psychology, vol. 5, 2015, doi:10.3389/fpsyg.2014.01341.
 
-[3] Sangnark, Soravitt, et al. “Thai Music Emotion Recognition by Linear Regression.” Proceedings of the 2018 2nd International Conference on Automation, Control and Robots  - ICACR 2018, 2018, doi:10.1088/1742-6596/1195/1/012009 
+[3] Sangnark, Soravitt, et al. “Thai Music Emotion Recognition by Linear Regression.” Proceedings of the 2018 2nd International Conference on Automation, Control and Robots  - ICACR 2018, 2018, doi:10.1088/1742-6596/1195/1/012009.
+
+[4] Deng, James J., et al. “Emotional States Associated with Music.” ACM Transactions on Interactive Intelligent Systems, vol. 5, no. 1, 2015, pp. 1–36., doi:10.1145/2723575. 
+
+[5] Liu, Yang, et al. “Learning Music Emotion Primitives via Supervised Dynamic Clustering.” Proceedings of the 24th ACM International Conference on Multimedia, 2016, doi:10.1145/2964284.2967215. 
 ```
+
+## Requirements
+
+### Python 3 Modules
+* [Spotipy](https://spotipy.readthedocs.io/en/2.18.0/)
+* [mplcursors](https://mplcursors.readthedocs.io/en/stable/)
+* [seaborn](https://seaborn.pydata.org/installing.html)
+* [matplot](https://pypi.org/project/matplotlib/)
+
+### Spotify API Secret Key
+A secret key from a Spotify developer's account should be stored in `helpers/spotify/supersecret.py` with the file format:
+```python
+CLIENT_ID  = 'YOUR KEY'
+SECRET_KEY = 'YOUR KEY'
+```
+

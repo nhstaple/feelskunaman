@@ -1,0 +1,11 @@
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Warning: maximum supported number is 100
+This Is Black Uhuru
+This is Black Uhuru. The essential tracks, all in one playlist.
+by Spotify
+valence μ:   happy  ( 0.523  )
+arousal μ:   awake  ( 0.524  )
+intensity:    0.74
+angle    :   45.10° ( Quad I )

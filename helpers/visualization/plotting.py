@@ -1,4 +1,5 @@
-from helpers.affect.scherer import Scherer2D
+from argparse import HelpFormatter
+from helpers.affect.scherer import Emotive2D, EPosition, VALENCE_RIGHT, VALENCE_LEFT, AROUSAL_UP, AROUSAL_DOWN
 import matplotlib.pyplot as plt
 import random
 from helpers.objects.track import Track
@@ -13,27 +14,30 @@ ALPHA_RINGS = 0.33
 SIZE_SONG = 33
 SIZE_CENTER = 66
 
-def DrawVectors(title: str, vectors: list, data: list, drawArrow: bool = False):
+def DrawVectors(title: str, vectors: list, data: list, normalize: bool):
     X: list = []
     Y: list = []
     n = len(vectors)
-    # arrows first
-    if n == 1 and drawArrow:
-        for i in range(0, len(vectors)):
-            v:Scherer2D = vectors[i]
-            valence, arousal = v.getValues()
-            plt.arrow(
-                x=0, y=0, dx=valence, dy=arousal,
-                color='black', alpha=0.33,
-                width=7.5e-3, length_includes_head=True,
-                label=''
-            )
+    instances = [0, 0, 0, 0]
 
     # plot individual songs
     center = [0, 0]
     ax = 0
-    for i in range(0, n):
-        v = vectors[i]
+    i = 0
+    for v in vectors[0:n]:            
+        quad: EPosition = v.getPosEncoding()
+        if quad == EPosition.QUAD1:
+            instances[0] = instances[0] + 1
+        elif quad == EPosition.QUAD2:
+            instances[1] = instances[1] + 1
+        elif quad == EPosition.QUAD3:
+            instances[2] = instances[2] + 1
+        else:
+            instances[3] = instances[3] + 1
+        
+        if normalize:
+            v.normalize(set=True)
+        
         x, y = v.getValues()
         strength = v.getIntensity()
         X.append(x) ; Y.append(y)
@@ -55,10 +59,13 @@ def DrawVectors(title: str, vectors: list, data: list, drawArrow: bool = False):
             s=SIZE_SONG,
             edgecolor='black'
         )
+        i = i + 1
+    # endfor
 
     # mean
     if n > 1:
-        center = Scherer2D(center[0] / n, center[1] / n)
+        center = Emotive2D(center[0] / n, center[1] / n)
+        if normalize: center.normalize(set = True)
         mean_x, mean_y = center.getValues()
         ax = sns.scatterplot(
             x=[ mean_x ],
@@ -78,7 +85,7 @@ def DrawVectors(title: str, vectors: list, data: list, drawArrow: bool = False):
     ax.add_patch(plt.Circle((0, 0), radius=1.00, edgecolor='black', facecolor='None', alpha=ALPHA_RINGS, label='r=1.00'))
 
     # title
-    plt.title(title, loc='center')
+    plt.title(title + '\nN = {}'.format(n), loc='center')
 
     # axi
     plt.ylabel('valence')
@@ -92,10 +99,10 @@ def DrawVectors(title: str, vectors: list, data: list, drawArrow: bool = False):
     ax.set_aspect('equal')
     
     # figure labels
-    plt.annotate('happy', xy=(1.15, 0))
-    plt.annotate('sad', xy=(-1.15, 0))
-    plt.annotate('awake', xy=(0, 1.15))
-    plt.annotate('asleep', xy=(0, -1.15))
+    plt.annotate(VALENCE_RIGHT, xy=(1.15, 0))
+    plt.annotate(VALENCE_LEFT, xy=(-1.15, 0))
+    plt.annotate(AROUSAL_UP, xy=(0, 1.15))
+    plt.annotate(AROUSAL_DOWN, xy=(0, -1.15))
 
     # annotations
     def on_click(sel):
@@ -127,5 +134,25 @@ def DrawVectors(title: str, vectors: list, data: list, drawArrow: bool = False):
     ax.set_xbound(lower=-1.30, upper=1.30)
     ax.set_ybound(lower=-1.30, upper=1.30)
 
+    # class instances
+    most_instances = instances.index(max(instances))
+    weights = ['normal', 'normal', 'normal', 'normal']
+    colors = ['grey', 'grey', 'grey', 'grey']
+    weights[most_instances] = 'bold'
+    colors[most_instances] = 'black'
+
+    plt.text(1, 1, str(instances[0]), horizontalalignment='left', size='medium',
+        color=colors[0], weight=weights[0])
+    
+    plt.text(-1, 1, str(instances[1]), horizontalalignment='left', size='medium',
+        color=colors[1], weight=weights[1])
+    
+    plt.text(-1, -1, str(instances[2]), horizontalalignment='left', size='medium',
+        color=colors[2], weight=weights[2])
+    
+    plt.text(1, -1, str(instances[3]), horizontalalignment='left', size='medium',
+        color=colors[3], weight=weights[3])
+    
     plt.show()
+    
     return
