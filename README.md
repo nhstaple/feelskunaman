@@ -196,21 +196,6 @@ Flags can be supplied to the terminal:
 * `--plot` provides an interactable figure that displays information for each item 
 * `--normalize` transforms points on the graph to fall along the unit circle (when `--plot` is set)
 
-### Example
-```
-python3 main.py --plot --normalize https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
-
-Feels Kuna Man - a tool for Music Emotion Recognition
-
-Layla And Other Assorted Love Songs (Remastered 2010)
-by Derek & The Dominos
-valence  :   happy  ( 0.142  )
-arousal  :   bored  ( -0.143 )
-intensity:    0.20
-angle    :  314.71° (Quad IV )
-```
-![](console_logs/layla.png)
-
 ## Results
 This section analyzes the emotions from individual artists in the musics of Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica.
 ### Ibrahim Ferrer, Cuba (bolero)
@@ -306,4 +291,127 @@ A secret key from a Spotify developer's account should be stored in `helpers/spo
 CLIENT_ID  = 'YOUR KEY'
 SECRET_KEY = 'YOUR KEY'
 ```
+
+## Usage Examples
+**Printing**
+```
+$ python3 main.py --print https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+ALBUM.meta
+  name       : Layla And Other Assorted Love Songs (Remastered 2010)
+  artist     : Derek & The Dominos
+  num tracks : 14
+  popularity : 69
+  length     : 76m 43s
+  url        : https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
+ALBUM.tracks
+  I Looked Away
+    valence  :   happy  ( 0.458  )
+    arousal  :   awake  ( 0.002  )
+    intensity:    0.46
+    angle    :    0.25° ( Quad I )
+  Bell Bottom Blues
+    valence  :   happy  ( 0.292  )
+    arousal  :   bored  ( -0.192 )
+    intensity:    0.35
+    angle    :  326.67° (Quad IV )
+  Keep On Growing
+    valence  :   happy  ( 0.448  )
+    arousal  :   awake  ( 0.012  )
+    intensity:    0.45
+    angle    :    1.53° ( Quad I )
+  Nobody Knows You When You're Down And Out
+    valence  :     sad  ( -0.248 )
+    arousal  :   bored  ( -0.088 )
+    intensity:    0.26
+    angle    :  199.54° (Quad III)
+  I Am Yours
+    valence  :   happy  ( 0.224  )
+    arousal  :   awake  ( 0.362  )
+    intensity:    0.43
+    angle    :   58.25° ( Quad I )
+  Anyday
+    valence  :   happy  ( 0.482  )
+    arousal  :   bored  ( -0.618 )
+    intensity:    0.78
+    angle    :  307.95° (Quad IV )
+  Key To The Highway
+    valence  :   happy  ( 0.142  )
+    arousal  :   bored  ( -0.416 )
+    intensity:    0.44
+    angle    :  288.85° (Quad IV )
+  Tell The Truth
+    valence  :   happy  ( 0.178  )
+    arousal  :   bored  ( -0.112 )
+    intensity:    0.21
+    angle    :  327.82° (Quad IV )
+  Why Does Love Got To Be So Sad?
+    valence  :     sad  ( -0.404 )
+    arousal  :   bored  ( -0.244 )
+    intensity:    0.47
+    angle    :  211.13° (Quad III)
+  Have You Ever Loved A Woman?
+    valence  :   happy  ( 0.288  )
+    arousal  :   bored  ( -0.394 )
+    intensity:    0.49
+    angle    :  306.17° (Quad IV )
+  Little Wing
+    valence  :   happy  ( 0.214  )
+    arousal  :   bored  ( -0.450 )
+    intensity:    0.50
+    angle    :  295.43° (Quad IV )
+  It's Too Late
+    valence  :   happy  ( 0.502  )
+    arousal  :   awake  ( 0.062  )
+    intensity:    0.51
+    angle    :    7.04° ( Quad I )
+  Layla
+    valence  :     sad  ( -0.006 )
+    arousal  :   bored  ( -0.192 )
+    intensity:    0.19
+    angle    :  268.21° (Quad III)
+  Thorn Tree In The Garden
+    valence  :     sad  ( -0.584 )
+    arousal  :   awake  ( 0.262  )
+    intensity:    0.64
+    angle    :  155.84° (Quad II )
+ALBUM.emotions
+  valence  :   happy  ( 0.142  )
+  arousal  :   bored  ( -0.143 )
+  intensity:    0.20
+  angle    :  314.71° (Quad IV )
+```
+
+**Plotting**
+```
+$ python3 main.py --plot https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Layla And Other Assorted Love Songs (Remastered 2010)
+by Derek & The Dominos
+valence  :   happy  ( 0.142  )
+arousal  :   bored  ( -0.143 )
+intensity:    0.20
+angle    :  314.71° (Quad IV )
+```
+![](console_logs/layla.png)
+
+**Normalization**
+```
+$ python3 main.py --plot --normalize https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Layla And Other Assorted Love Songs (Remastered 2010)
+by Derek & The Dominos
+valence  :   happy  ( 0.142  )
+arousal  :   bored  ( -0.143 )
+intensity:    0.20
+angle    :  314.71° (Quad IV )
+```
+![](console_logs/layla_normalized.png)
+
 
