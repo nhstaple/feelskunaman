@@ -1,6 +1,6 @@
 # FKM: *Feels Kuna Man*
 ## Abstract
-An individual's environment influences factors in music emotion recognition (MER.) And while there is a wealth of analysis using Western music, it is rare to find literature in machine learning that examines non-Western music. This is problematic because the academic community has not given equal weight to the human experience of people form marginalized communities.
+An individual's environment influences factors in music emotion recognition (MER.) And while there is a wealth of analysis using Western music, it is rare to find literature in machine learning that examines non-Western music. This is problematic because the academic community has not given equal weight to the human experience of people from marginalized communities.
 
 The goal of this work is to remedy the imbalance of cultures in MER by providing a proof-of-concept framework to enable the analysis of non-Western music. This project contributes *emotives* as a computational abstraction of affective semantic space, and presents visualization of data from diverse musics of Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica. Future work calls for actionable data and robust open-source music information retrieval (MIR) frameworks to examine the potential of universal affective components of music, with potential applications to psychiatry treatments.
 
