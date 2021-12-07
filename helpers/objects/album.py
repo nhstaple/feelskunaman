@@ -2,6 +2,8 @@
 from helpers.affect.scherer import Scherer2D
 from helpers.music.tracks import decode_ms
 
+from helpers.visualization.plotting import DrawVectors
+
 class Album():
     def __init__(self, features: dict, tracks: list):
         self._tracks: str      = tracks
@@ -47,3 +49,5 @@ class Album():
         val = val + '  {}\n'.format(Scherer2D.__repr__(self.emotive).replace('\n', '\n  '))
         return val
 
+    def plot(self):
+        DrawVectors(self.name, self.getVectors(), self._tracks)

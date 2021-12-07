@@ -11,3 +11,6 @@ def execute(args: Namespace):
         print(album.name)
         print('by ' + album.artist)
         print(album.emotive)
+
+    if args.plot:
+        album.plot()

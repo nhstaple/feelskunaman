@@ -92,6 +92,9 @@ class Scherer2D():
         val, aro = self._data.getComponents()
         return aro
 
+    def getValues(self):
+        return self._data.getComponents()
+
     def __repr__(self) -> str:
         pos = self.getPosEncoding()
         dim1, dim2 = EPosition.decode(pos)
