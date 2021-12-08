@@ -14,7 +14,7 @@ This project aims to examines to provide a framework to anaylze and visualize af
 ## Methodology
 While 3D models of semantic space demonstrates effectiveness in music recommendation [4], a 2D valence-arousal model enables visualization. In this work, `danceability` estimates arousal in Spotify's API instead of `energy` as explored by [3].
 
-This project contributes a formalized unit for affective computation referred to as *emotives*, see module `helpers.affect.scherer`. An emotive, a unit of emotion [5], is an abstraction for vectors in affective semantic space, and the source code allows for the renaming of emotional labels and the substitution of valence and arousal. Quadrants broadly classify emotions in this work:
+This project contributes a formalized unit for affective computation referred to as *emotives*, see module [`helpers.affect.scherer`](https://github.com/nhstaple/feelskunaman/blob/88689b7b4df03ad60f7732ac883c7a1b15705cf7/helpers/affect/scherer.py#L57). An emotive, a unit of emotion [5], is an abstraction for vectors in affective semantic space, and the source code allows for the renaming of emotional labels and the substitution of valence and arousal. Quadrants broadly classify emotions in this work:
 
 * Valence: happy for the first and fourth quadrants, and sad for the second and third quadrants.
 * Arousal: awake for the first and second quadrats, and bored for the third and fourth quadrants.
@@ -22,7 +22,7 @@ This project contributes a formalized unit for affective computation referred to
 The valence-arousal components of each emotive are provided by Spotify through floating point numbers rangind from `[0, 1]`. For the sake of analysis, these values are linearly transformed about the origin to fall in the range `[-1, 1]`. The position of an emotive is defined in terms of polar coordinates: `(r, θ)` where `r` is the emotive's *intensity*, or vector norm, and θ is the emotive's *direction*. 
 
 ### Music Information Retrieval (Spotify)
-Information is provided from Spotify's API through the `helpers.spotify.client` submodule.
+Information is provided from Spotify's API through the [`helpers.spotify.client`](https://github.com/nhstaple/feelskunaman/blob/88689b7b4df03ad60f7732ac883c7a1b15705cf7/helpers/spotify/client.py#L12) submodule.
 
 * tracks (plotting is not supported)
 * albums
@@ -175,7 +175,7 @@ Combined with efforts to identify a list of emotive units in songs [5], rather t
 * [matplot](https://pypi.org/project/matplotlib/)
 
 ### Spotify API Secret Key
-A secret key from a Spotify developer's account should be stored in `helpers/spotify/supersecret.py` with the file format:
+[Credentials from a Spotify developer account](https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/) should be stored in `helpers/spotify/supersecret.py` with the file format:
 ```python
 CLIENT_ID  = 'YOUR KEY'
 SECRET_KEY = 'YOUR KEY'
