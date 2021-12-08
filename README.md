@@ -19,7 +19,7 @@ This project contributes a formalized unit for affective computation referred to
 * Valence: happy for the first and fourth quadrants, and sad for the second and third quadrants.
 * Arousal: awake for the first and second quadrats, and bored for the third and fourth quadrants.
 
-The valence-arousal components of each emotive are provided by Spotify through floating point numbers rangind from `[0, 1]`. For the sake of analysis, these values are linearly transformed about the origin to fall in the range `[-1, 1]`. The position of an emotive is defined in terms of polar coordinates: `(r, θ)` where $r$ is the emotive's *intensity*, or vector norm, and θ is the emotive's *direction*. 
+The valence-arousal components of each emotive are provided by Spotify through floating point numbers rangind from `[0, 1]`. For the sake of analysis, these values are linearly transformed about the origin to fall in the range `[-1, 1]`. The position of an emotive is defined in terms of polar coordinates: `(r, θ)` where `r` is the emotive's *intensity*, or vector norm, and θ is the emotive's *direction*. 
 
 ### Music Information Retrieval (Spotify)
 Information is provided from Spotify's API through the `helpers.spotify.client` submodule.
