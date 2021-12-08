@@ -1,4 +1,6 @@
 # FKM: *Feels Kuna Man*
+Note: this report is a rough draft.
+
 ## Abstract
 An individual's environment influences factors in music emotion recognition (MER.) And while there is a wealth of analysis using Western music, it is rare to find literature in machine learning that examines non-Western music. This is problematic because the academic community has not given equal weight to the human experience of people from marginalized communities.
 
@@ -17,7 +19,7 @@ This project contributes a formalized unit for affective computation referred to
 * Valence: happy for the first and fourth quadrants, and sad for the second and third quadrants.
 * Arousal: awake for the first and second quadrats, and bored for the third and fourth quadrants.
 
-The valence-arousal components of each emotive are provided by Spotify through floating point numbers rangind from $[0, 1]$. For the sake of analysis, these values are linearly transformed about the origin to fall in the range $[-1, 1]$. The position of an emotive is defined in terms of polar coordinates: $(r, \theta)$ where $r$ is the emotive's *intensity*, or vector norm, and $\theta$ is the emotive's *direction*. 
+The valence-arousal components of each emotive are provided by Spotify through floating point numbers rangind from `[0, 1]`. For the sake of analysis, these values are linearly transformed about the origin to fall in the range `[-1, 1]`. The position of an emotive is defined in terms of polar coordinates: `(r, θ)` where $r$ is the emotive's *intensity*, or vector norm, and θ is the emotive's *direction*. 
 
 ### Music Information Retrieval (Spotify)
 Information is provided from Spotify's API through the `helpers.spotify.client` submodule.
@@ -29,172 +31,57 @@ Information is provided from Spotify's API through the `helpers.spotify.client` 
 ### Validation
 The data in the following results were carefully selected by the author. Individual songs are represented as triangles, and the mean of each set of songs is represented by a circle. 
 
-#### Quadrant I ($+$valence, $+$arousal)
+#### Quadrant I (`+` valence, `+` arousal)
 The songs in the first quadrant are meant to represent the range of emotions in: happy, awake.
+
+| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
+| I've Got a Woman | Ray Charles | `0.330` | `0.112` | `0.35` | `18.75°` | `I` |
+| Como te extraño mi amor | Café Tacvba | `0.834` | `0.582` | `1.02` | `34.91°` | `I` |
+| Your Love | Mick Jenkins | `0.278` | `0.304` | `0.41` | `47.56°` | `I` |
+| | | | | | | |
+| | **mean** | `0.481` | `0.333` | `0.58` | `34.69°` | `I` |
+
 ![](./console_logs/quad1.png)
-```
-PLAYLIST.meta
-  name       : Quadrant I
-  by         : nicholas.stapleton
-  num tracks : 3
-  length     : 9m 40s
-  url        : https://open.spotify.com/playlist/6Z4hdXA63y3i5L7lE9IuZH
-PLAYLIST.tracks
-  I've Got a Woman
-  by Ray Charles
-  on Ray Charles (aka: Hallelujah, I Love Her So)
-    valence  :   happy  ( 0.330  )
-    arousal  :   awake  ( 0.112  )
-    intensity:    0.35
-    angle    :   18.75° ( Quad I )
-  Como te extraño mi amor
-  by Café Tacvba
-  on Avalancha de éxitos
-    valence  :   happy  ( 0.834  )
-    arousal  :   awake  ( 0.582  )
-    intensity:    1.02
-    angle    :   34.91° ( Quad I )
-  Your Love
-  by Mick Jenkins
-  on Wave[s]
-    valence  :   happy  ( 0.278  )
-    arousal  :   awake  ( 0.304  )
-    intensity:    0.41
-    angle    :   47.56° ( Quad I )
-PLAYLIST.emotions
-  valence  :   happy  ( 0.481  )
-  arousal  :   awake  ( 0.333  )
-  intensity:    0.58
-  angle    :   34.69° ( Quad I )
-```
 
-#### Quadrant II ($-$valence, $+$arousal)
+#### Quadrant II (`-` valence, `+` arousal)
 The songs in the first quadrant are meant to represent the range of emotions in: sad, awake.
+
+| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
+| Guess Who I Saw Today | Nancy Wilson | `-0.620` | `0.178` | `0.65` | `163.98°` | `II` |
+| Blue Rondo à la Turk | The Dave Brubeck Quartet | `-0.064` | `0.176` | `0.19` | `109.98°` | `II` |
+| Banana Boat (Day-O) | Harry Belafonte | `-0.162` | `0.594` | `0.62` | `105.26°` | `II` |
+| | | | | | | |
+| | **mean** | `-0.282` | `0.316` | `0.42` | `131.75°` | `II` |
+
 ![](./console_logs/quad2.png)
-```
-PLAYLIST.meta
-  name       : Quadrant II
-  by         : nicholas.stapleton
-  num tracks : 3
-  length     : 13m 14s
-  url        : https://open.spotify.com/playlist/6gNomfqtRg5LQxBHXiF1hs
-PLAYLIST.tracks
-  Guess Who I Saw Today - Remastered/2004
-  by Nancy Wilson
-  on Something Wonderful
-    valence  :     sad  ( -0.620 )
-    arousal  :   awake  ( 0.178  )
-    intensity:    0.65
-    angle    :  163.98° (Quad II )
-  Blue Rondo à la Turk
-  by The Dave Brubeck Quartet
-  on Time Out
-    valence  :     sad  ( -0.064 )
-    arousal  :   awake  ( 0.176  )
-    intensity:    0.19
-    angle    :  109.98° (Quad II )
-  Banana Boat (Day-O)
-  by Harry Belafonte
-  on Calypso
-    valence  :     sad  ( -0.162 )
-    arousal  :   awake  ( 0.594  )
-    intensity:    0.62
-    angle    :  105.26° (Quad II )
-PLAYLIST.emotions
-  valence  :     sad  ( -0.282 )
-  arousal  :   awake  ( 0.316  )
-  intensity:    0.42
-  angle    :  131.75° (Quad II )
-```
 
-#### Quadrant III ($-$valence, $-$arousal)
+#### Quadrant III (`-` valence, `-` arousal)
 The songs in the third quadrant are meant to represent the range of emotions in: sad, bored.
+
+| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
+| Claire de Lune | Claude Debussy | `-0.927` | `-0.270` | `0.97` | `196.24°` | `III` |
+| The Sound of Silence | Pat Metheny | `-0.920` | `-0.142` | `0.93` | `188.77°` | `III` |
+| Within You Without You | The Beatles | `-0.292` | `-0.296` | `0.42` | `225.39°` | `III` |
+| | | | | | | |
+| | **mean** | `-0.713` | `-0.236` | `0.75` | `198.31°` | `III` |
+
 ![](./console_logs/quad3.png)
-```
-PLAYLIST.meta
-  name       : Quadrant III
-  by         : nicholas.stapleton
-  num tracks : 3
-  length     : 17m 25s
-  url        : https://open.spotify.com/playlist/6sHwmWqfay5v2WFbmqOeBL
-PLAYLIST.tracks
-  Claire de lune
-  by Claude Debussy
-  on Träumerei - Liebestraum - Für Elise - Clair de lune - Gymnopédie - Sony Classical Masters
-    valence  :     sad  ( -0.927 )
-    arousal  :   bored  ( -0.270 )
-    intensity:    0.97
-    angle    :  196.24° (Quad III)
-  The Sound of Silence
-  by Pat Metheny
-  on What's It All About
-    valence  :     sad  ( -0.920 )
-    arousal  :   bored  ( -0.142 )
-    intensity:    0.93
-    angle    :  188.77° (Quad III)
-  Within You Without You - Remastered 2009
-  by The Beatles
-  on Sgt. Pepper's Lonely Hearts Club Band (Remastered)
-    valence  :     sad  ( -0.292 )
-    arousal  :   bored  ( -0.296 )
-    intensity:    0.42
-    angle    :  225.39° (Quad III)
-PLAYLIST.emotions
-  valence  :     sad  ( -0.713 )
-  arousal  :   bored  ( -0.236 )
-  intensity:    0.75
-  angle    :  198.31° (Quad III)
-```
 
-#### Quadrant IV - ($+$valence, $-$arousal)
+#### Quadrant IV (`+` valence, `-` arousal)
 The songs in the fourth quadrant are meant to represent the range of emotions in: happy, bored.
+
+| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
+| Rio Grande | Storm Weather Shanty Choir | `0.076` | `-0.292` | `0.30` | `284.59°` | `IV` |
+| Through the Roof 'n' Underground | Gogol Bordello | `0.460` | `-0.066` | `0.46` | `351.84°` | `IV` |
+| Sgt. Pepper's Lonely Hearts Club Band | The Beatles | `0.166` | `-0.098` | `0.19` | `329.44°` | `IV` |
+| | | | | | | |
+| | **mean** | `0.234` | `-0.152` | `0.28` | `326.99°` | `IV` |
+
 ![](./console_logs/quad4.png)
-```
-PLAYLIST.meta
-  name       : Quadrant IV
-  by         : nicholas.stapleton
-  num tracks : 3
-  length     : 11m 2s
-  url        : https://open.spotify.com/playlist/5iaYVzoF3DDe1YgNwaGLhL
-PLAYLIST.tracks
-  Rio Grande
-  by Storm Weather Shanty Choir
-  on Way Hey (And Away We'll Go)
-    valence  :     sad  ( 0.076  )
-    arousal  :   bored  ( -0.292 )
-    intensity:    0.30
-    angle    :  284.59° (Quad III)
-  Through the Roof 'n' Underground
-  by Gogol Bordello
-  on Multi Kontra Culti vs Irony
-    valence  :     sad  ( 0.460  )
-    arousal  :   bored  ( -0.066 )
-    intensity:    0.46
-    angle    :  351.84° (Quad III)
-  Sgt. Pepper's Lonely Hearts Club Band - Remastered 2009
-  by The Beatles
-  on Sgt. Pepper's Lonely Hearts Club Band (Remastered)
-    valence  :     sad  ( 0.166  )
-    arousal  :   bored  ( -0.098 )
-    intensity:    0.19
-    angle    :  329.44° (Quad III)
-PLAYLIST.emotions
-  valence  :     sad  ( 0.234  )
-  arousal  :   bored  ( -0.152 )
-  intensity:    0.28
-  angle    :  326.99° (Quad III)
-```
-
-## Usage
-General usage follows:
-```
-python3 main.py <FLAGS> <ONE SPOTIFY URL>
-```
-Flags can be supplied to the terminal:
-
-* `--print` displays detailed information for each item
-* `--plot` provides an interactable figure that displays information for each item 
-* `--normalize` transforms points on the graph to fall along the unit circle (when `--plot` is set)
 
 ## Results
 This section analyzes the emotions from individual artists in the musics of Cuba, India, China, Tuva, South Africa, Mexico, and Jamaica.
@@ -228,8 +115,8 @@ angle    :  222.79° (Quad III)
 ### Huun-Huur-Tur, Tuva (throat singing)
 ![](console_logs/huun.png)
 ```
-valence μ:     sad  ( -0.489 )
-arousal μ:   bored  ( -0.380 )
+valence  :     sad  ( -0.489 )
+arousal  :   bored  ( -0.380 )
 intensity:    0.62
 angle    :  217.89° (Quad III)
 ```
@@ -237,8 +124,8 @@ angle    :  217.89° (Quad III)
 ### Mahlathini, South Africa (mbaqanga)
 ![](console_logs/mahlathini.png)
 ```
-valence μ:   happy  ( 0.755  )
-arousal μ:   awake  ( 0.485  )
+valence  :   happy  ( 0.755  )
+arousal  :   awake  ( 0.485  )
 intensity:    0.90
 angle    :   32.72° ( Quad I )
 ```
@@ -246,8 +133,8 @@ angle    :   32.72° ( Quad I )
 ### Mariachi Divas de Cindy Shea, California/Mexico (mariachi)
 ![](console_logs/mariachi.png)
 ```
-valence μ:   happy  ( 0.033  )
-arousal μ:   bored  ( -0.062 )
+valence  :   happy  ( 0.033  )
+arousal  :   bored  ( -0.062 )
 intensity:    0.07
 angle    :  297.67° (Quad IV )
 ```
@@ -255,14 +142,16 @@ angle    :  297.67° (Quad IV )
 ### Black Uhuru, Jamaica (reggae)
 ![](console_logs/black.png)
 ```
-valence μ:   happy  ( 0.523  )
-arousal μ:   awake  ( 0.524  )
+valence  :   happy  ( 0.523  )
+arousal  :   awake  ( 0.524  )
 intensity:    0.74
 angle    :   45.10° ( Quad I )
 ```
 
 ## Future Work
-This project aims to quickly gather emotional information of music through Spotify's API. This approach is not general because of Spotify's proprietary music information retrieval software (echonest.) While analysis of Thai music was succesful enough to produce a modest classifier [3], deeper analysis of universal MER necessitates an open source solution combined with raw actionable non-Western source music. Combined with efforts to identify individual emotive units in songs [5], rather than assigning labels to whole songs, could gather better training data for machine learning models [4]. Applications of MER systems include treatment for psychiatric conditions.
+This project aims to quickly gather emotional information of music through Spotify's API. This approach is not general because of Spotify's proprietary music information retrieval software (echonest.) While analysis of Thai music was succesful enough to produce a modest classifier [3], deeper analysis of universal MER necessitates an open source solution combined with raw actionable non-Western source music. Spotify's API limits possible analysis of MER by computing features for an entire song rather than individual sections. While frame data is available, Spotify's API documentation is opaque at the time of investigation making complex analysis infeasible. The author notes *librosa* and *AMUSE* as possible alternative APIs to develop an appropriate framework but would still require actionable non-Western music to extract analyzable information.
+
+Combined with efforts to identify a list of emotive units in songs [5], rather than assigning one label to an entire song, MIR systems could gather better training data for machine learning models [4]. Future work will examine MER similarity of multi-cultural music through psychological features. Potential applications of MER systems include treatment for psychiatric conditions and music education.
 
 ## Citations
 ```
@@ -292,7 +181,35 @@ CLIENT_ID  = 'YOUR KEY'
 SECRET_KEY = 'YOUR KEY'
 ```
 
-## Usage Examples
+## Usage
+General usage in the root project directory follows:
+```
+python3 main.py <OPTIONAL FLAGS> <ONE SPOTIFY URL>
+```
+
+Flags can be supplied to the terminal:
+
+* `--print` displays detailed information for each item
+* `--plot` provides an interactable figure that displays information for each item 
+* `--normalize` transforms points on the graph to fall along the unit circle (when `--plot` is set)
+
+Note: `--plot` supports interactive figures. Click any point on the graph to display additional information such as song, artist, emotive components, intensity, and angle.
+
+### Examples
+**Basic**
+```
+$ python3 main.py https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
+
+Feels Kuna Man - a tool for Music Emotion Recognition
+
+Layla And Other Assorted Love Songs (Remastered 2010)
+by Derek & The Dominos
+valence  :   happy  ( 0.142  )
+arousal  :   bored  ( -0.143 )
+intensity:    0.20
+angle    :  314.71° (Quad IV )
+```
+
 **Printing**
 ```
 $ python3 main.py --print https://open.spotify.com/album/5iIWnMgvSM8uEBwXKsPcXM
