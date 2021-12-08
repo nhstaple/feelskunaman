@@ -29,57 +29,57 @@ Information is provided from Spotify's API through the `helpers.spotify.client` 
 * playlists (limited by 100 songs)
 
 ### Validation
-The data in the following results were carefully selected by the author. Individual songs are represented as triangles, and the mean of each set of songs is represented by a circle. 
+The data in the following section was selected by the author to visualize emotives. Individual songs are represented as triangles, and the mean of each set of songs is represented by a circle. 
 
 #### Quadrant I (`+` valence, `+` arousal)
-The songs in the first quadrant are meant to represent the range of emotions in: happy, awake.
+The songs in the first quadrant are meant to represent the range of emotions betwen happy and awake.
 
-| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
-| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
-| I've Got a Woman | Ray Charles | `0.330` | `0.112` | `0.35` | `18.75°` | `I` |
-| Como te extraño mi amor | Café Tacvba | `0.834` | `0.582` | `1.02` | `34.91°` | `I` |
-| Your Love | Mick Jenkins | `0.278` | `0.304` | `0.41` | `47.56°` | `I` |
+| Title | Artist | Valence | Arousal | Intensity | Angle | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: | 
+| I've Got a Woman | Ray Charles | `0.330` | `0.112` | `0.35` | `18.75°` |
+| Como te extraño mi amor | Café Tacvba | `0.834` | `0.582` | `1.02` | `34.91°` |
+| Your Love | Mick Jenkins | `0.278` | `0.304` | `0.41` | `47.56°` |
 | | | | | | | |
-| | **mean** | `0.481` | `0.333` | `0.58` | `34.69°` | `I` |
+| | **mean** | `0.481` | `0.333` | `0.58` | `34.69°` |
 
 ![](./console_logs/quad1.png)
 
 #### Quadrant II (`-` valence, `+` arousal)
-The songs in the first quadrant are meant to represent the range of emotions in: sad, awake.
+The songs in the second quadrant are meant to represent the range of emotions between sad and awake.
 
-| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
-| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
-| Guess Who I Saw Today | Nancy Wilson | `-0.620` | `0.178` | `0.65` | `163.98°` | `II` |
-| Blue Rondo à la Turk | The Dave Brubeck Quartet | `-0.064` | `0.176` | `0.19` | `109.98°` | `II` |
-| Banana Boat (Day-O) | Harry Belafonte | `-0.162` | `0.594` | `0.62` | `105.26°` | `II` |
+| Title | Artist | Valence | Arousal | Intensity | Angle | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: |
+| Guess Who I Saw Today | Nancy Wilson | `-0.620` | `0.178` | `0.65` | `163.98°` | 
+| Blue Rondo à la Turk | The Dave Brubeck Quartet | `-0.064` | `0.176` | `0.19` | `109.98°` |
+| Banana Boat (Day-O) | Harry Belafonte | `-0.162` | `0.594` | `0.62` | `105.26°` | 
 | | | | | | | |
-| | **mean** | `-0.282` | `0.316` | `0.42` | `131.75°` | `II` |
+| | **mean** | `-0.282` | `0.316` | `0.42` | `131.75°` | 
 
 ![](./console_logs/quad2.png)
 
 #### Quadrant III (`-` valence, `-` arousal)
-The songs in the third quadrant are meant to represent the range of emotions in: sad, bored.
+The songs in the third quadrant are meant to represent the range of emotions between sad and bored.
 
-| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
-| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
-| Claire de Lune | Claude Debussy | `-0.927` | `-0.270` | `0.97` | `196.24°` | `III` |
-| The Sound of Silence | Pat Metheny | `-0.920` | `-0.142` | `0.93` | `188.77°` | `III` |
-| Within You Without You | The Beatles | `-0.292` | `-0.296` | `0.42` | `225.39°` | `III` |
+| Title | Artist | Valence | Arousal | Intensity | Angle | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: |
+| Claire de Lune | Claude Debussy | `-0.927` | `-0.270` | `0.97` | `196.24°` |
+| The Sound of Silence | Pat Metheny | `-0.920` | `-0.142` | `0.93` | `188.77°` | 
+| Within You Without You | The Beatles | `-0.292` | `-0.296` | `0.42` | `225.39°` | 
 | | | | | | | |
-| | **mean** | `-0.713` | `-0.236` | `0.75` | `198.31°` | `III` |
+| | **mean** | `-0.713` | `-0.236` | `0.75` | `198.31°` | 
 
 ![](./console_logs/quad3.png)
 
 #### Quadrant IV (`+` valence, `-` arousal)
-The songs in the fourth quadrant are meant to represent the range of emotions in: happy, bored.
+The songs in the fourth quadrant are meant to represent the range of emotions between happy and bored.
 
-| Title | Artist | Valence | Arousal | Intensity | Angle | Quad | 
-| :---  | :---   | :---:   | :---:   | :---:     | :---: | :---:    |
-| Rio Grande | Storm Weather Shanty Choir | `0.076` | `-0.292` | `0.30` | `284.59°` | `IV` |
-| Through the Roof 'n' Underground | Gogol Bordello | `0.460` | `-0.066` | `0.46` | `351.84°` | `IV` |
-| Sgt. Pepper's Lonely Hearts Club Band | The Beatles | `0.166` | `-0.098` | `0.19` | `329.44°` | `IV` |
+| Title | Artist | Valence | Arousal | Intensity | Angle | 
+| :---  | :---   | :---:   | :---:   | :---:     | :---: | 
+| Rio Grande | Storm Weather Shanty Choir | `0.076` | `-0.292` | `0.30` | `284.59°` | 
+| Through the Roof 'n' Underground | Gogol Bordello | `0.460` | `-0.066` | `0.46` | `351.84°` |
+| Sgt. Pepper's Lonely Hearts Club Band | The Beatles | `0.166` | `-0.098` | `0.19` | `329.44°` | 
 | | | | | | | |
-| | **mean** | `0.234` | `-0.152` | `0.28` | `326.99°` | `IV` |
+| | **mean** | `0.234` | `-0.152` | `0.28` | `326.99°` | 
 
 ![](./console_logs/quad4.png)
 
@@ -88,8 +88,8 @@ This section analyzes the emotions from individual artists in the musics of Cuba
 ### Ibrahim Ferrer, Cuba (bolero)
 ![](console_logs/ibrahim.png)
 ```
-valence μ:   happy  ( 0.389  )
-arousal μ:   awake  ( 0.133  )
+valence  :   happy  ( 0.389  )
+arousal  :   awake  ( 0.133  )
 intensity:    0.41
 angle    :   18.94° ( Quad I )
 ```
