@@ -53,3 +53,15 @@ class Playlist():
     def plot(self, normalize:bool):
         DrawVectors('Playlist ' + self.name, self.getVectors(), self._tracks, normalize)
 
+
+    def toPythonDict(self) -> dict:
+        data: dict = dict()
+
+        #
+        data['average_valence'] = self.emotive.getValence()
+        data['average_arousal'] = self.emotive.getArousal()
+
+        #
+        data['tracks'] = [ track.toPythonDict() for track in self._tracks ]
+
+        return data

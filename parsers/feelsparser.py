@@ -28,6 +28,12 @@ def FeelsParser() -> ArgumentParser:
         default=False
     )
 
+    parser.add_argument(
+        '--save',
+        action='store_true',
+        default=False
+    )
+
     # displays the item(s)
     parser.add_argument(
         '--plot',

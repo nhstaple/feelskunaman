@@ -1,6 +1,7 @@
 
 from helpers.affect.scherer import Emotive2D
 from helpers.music.tracks import decode_mode, decode_key, decode_ms
+
 class Track():
     def __init__(self, features:dict):
         self.emotive: Emotive2D = Emotive2D(
@@ -41,3 +42,25 @@ class Track():
         val = val + '  intensity  {:>s}\n'.format(intensity)
         val = val + '  angle      {:>s}\n'.format(self.emotive.getAngle(rad=False))
         return val
+
+    def toPythonDict(self) -> dict:
+        data: dict = dict()
+
+        #
+        data['name'] = self.name
+        data['artist'] = self.artist
+        data['artist_id'] = self.artist_id
+        data['album'] = self.album
+        data['album_id'] = self.album_id
+        data['url'] = self.url
+        data['id'] = self.id
+
+        #
+        data['popularity'] = self.popularity
+        data['explicit'] = self.explicit
+
+        #
+        data['valence'] = self.emotive.getValence()
+        data['arousal'] = self.emotive.getArousal()
+
+        return data
